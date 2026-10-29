@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image to Video Aspect Ratio: Preview the Crop First | Photo2Reel</title>
+  <meta name="description" content="Preview one source image in portrait, square, and landscape frames before an image-to-video render. Adjust the crop locally and export the versions you need.">
+  <link rel="canonical" href="https://photo2reel.com/image-to-video-frame-planning/">
+  <style>
+    :root{--ink:#242133;--muted:#6b6580;--purple:#7049e8;--line:#e7e3ef;--paper:#fcfbfe;--soft:#f1edfc;--green:#17765e}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+    a{color:inherit}
+    .wrap{max-width:1080px;margin:auto;padding:0 24px}
+    .nav{display:flex;align-items:center;gap:24px;padding:22px 0;border-bottom:1px solid var(--line)}
+    .brand{font-size:22px;font-weight:850;text-decoration:none;letter-spacing:-1px;white-space:nowrap}
+    .brand span{color:var(--purple)}
+    .nav-links{display:flex;flex-wrap:wrap;gap:10px 20px;margin-left:auto}
+    .nav-links a{color:var(--muted);font-size:14px;font-weight:650;text-decoration:none}
+    .nav-links a:hover,.nav-links a:focus-visible{color:var(--purple)}
+    .crumb{margin:22px 0 0;color:var(--muted);font-size:13px}
+    .crumb a{color:var(--purple)}
+    .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.9fr);gap:44px;align-items:center;padding:48px 0 56px}
+    .eyebrow,.label{font-size:12px;font-weight:850;letter-spacing:.1em;text-transform:uppercase;color:var(--purple)}
+    h1{max-width:650px;margin:13px 0 16px;font-size:clamp(2.35rem,5vw,4.2rem);line-height:1.04;letter-spacing:-.065em}
+    .lede{max-width:640px;margin:0;color:var(--muted);font-size:18px}
+    .answer{margin-top:21px;padding:16px 18px;border-left:4px solid var(--purple);border-radius:0 12px 12px 0;background:#f3efff}
+    .answer b{display:block;margin-bottom:4px}
+    .answer p{margin:0;color:#504963;font-size:15px}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;margin-top:20px;padding:10px 16px;border:1px solid var(--purple);border-radius:10px;background:var(--purple);color:#fff;font-size:14px;font-weight:800;text-decoration:none}
+    .button:hover{background:#5d35d0}
+    .hero-figure{margin:0;padding:12px;border:1px solid var(--line);border-radius:20px;background:#fff;box-shadow:0 14px 38px rgba(47,38,80,.08)}
+    .hero-figure img{display:block;width:100%;height:auto;border-radius:12px}
+    .frame-labels{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:12px 4px 2px;text-align:center}
+    .frame-labels span{color:var(--muted);font-size:12px;font-weight:750}
+    .section{padding:58px 0;border-top:1px solid var(--line)}
+    h2{margin:0 0 12px;font-size:clamp(1.65rem,3.5vw,2.5rem);line-height:1.15;letter-spacing:-.045em}
+    h3{margin:0 0 7px;font-size:1.05rem;line-height:1.3}
+    .section-intro{max-width:720px;margin:0 0 24px;color:var(--muted)}
+    .planner{padding:22px;border:1px solid #ddd6ef;border-radius:20px;background:#fff;box-shadow:0 10px 32px rgba(47,38,80,.06)}
+    .upload-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+    .upload-label{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 14px;border:1px solid var(--purple);border-radius:9px;color:var(--purple);font-size:14px;font-weight:800;cursor:pointer}
+    .upload-label:hover{background:var(--soft)}
+    #image-file{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;clip-path:inset(50%)}
+    #image-file:focus-visible + .upload-label{outline:3px solid #b8a8ff;outline-offset:2px}
+    .privacy-note{margin:0;color:var(--green);font-size:13px;font-weight:700}
+    .status{min-height:25px;margin:11px 0 17px;color:var(--muted);font-size:13px}
+    .controls{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 18px;padding:15px;border-radius:12px;background:#f7f5fb}
+    .control label{display:flex;justify-content:space-between;gap:10px;margin-bottom:5px;font-size:13px;font-weight:750}
+    .control output{color:var(--purple);font-variant-numeric:tabular-nums}
+    input[type=range]{width:100%;accent-color:var(--purple)}
+    .previews{display:grid;grid-template-columns:.72fr 1fr 1.3fr;gap:12px;align-items:end}
+    .preview-card{min-width:0;padding:10px;border:1px solid var(--line);border-radius:13px;background:#fff}
+    .preview-card h3{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+    .preview-card h3 span{color:var(--muted);font-size:12px;font-weight:650}
+    .frame{display:grid;place-items:center;overflow:hidden;width:100%;background:linear-gradient(135deg,#eeebf6,#f8f7fa);border-radius:8px}
+    .frame.portrait{aspect-ratio:9/16}
+    .frame.square{aspect-ratio:1}
+    .frame.landscape{aspect-ratio:16/9}
+    .frame img{display:none;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+    .frame.has-image img{display:block}
+    .placeholder{padding:8px;color:#8b849a;text-align:center;font-size:12px}
+    .frame.has-image .placeholder{display:none}
+    .download{width:100%;min-height:38px;margin-top:9px;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:12px;font-weight:750;cursor:pointer}
+    .download:hover:not(:disabled){border-color:#b4a4ef;color:var(--purple)}
+    .download:disabled{color:#a39daf;background:#f8f7fa;cursor:not-allowed}
+    .method{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+    .method article{padding:17px;border:1px solid var(--line);border-radius:14px;background:#fff}
+    .method p,.body-copy{margin:0;color:var(--muted);font-size:14px}
+    .callout{margin-top:20px;padding:16px 18px;border:1px solid #e7e3ef;border-radius:12px;background:#fff;color:var(--muted);font-size:14px}
+    .source{font-size:13px;overflow-wrap:anywhere}
+    .source a{color:var(--purple)}
+    .related{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+    .related a{padding:10px 13px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--purple);font-size:13px;font-weight:750;text-decoration:none}
+    .faq{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    details{padding:0 15px;border:1px solid var(--line);border-radius:12px;background:#fff}
+    summary{padding:14px 22px 14px 0;font-size:14px;font-weight:800;cursor:pointer}
+    details p{margin:0 0 15px;color:var(--muted);font-size:14px}
+    footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding:25px 0 36px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+    footer nav{display:flex;gap:15px}
+    footer a{text-decoration:none}
+    @media(max-width:760px){.hero{grid-template-columns:1fr;gap:24px}.hero-figure{max-width:620px}.method{grid-template-columns:1fr}.previews{grid-template-columns:.78fr 1fr 1.25fr}}
+    @media(max-width:560px){.wrap{padding:0 16px}.nav{align-items:flex-start;flex-wrap:wrap;gap:12px 18px}.nav-links{width:100%;margin:0;gap:8px 15px}.nav-links a{white-space:nowrap;font-size:13px}.hero{padding:34px 0 40px}.section{padding:42px 0}.planner{padding:14px}.controls{grid-template-columns:1fr}.previews{grid-template-columns:1fr}.preview-card{display:grid;grid-template-columns:110px 1fr;grid-template-rows:auto 1fr;column-gap:12px;align-items:center}.preview-card h3{grid-column:1/-1}.frame{grid-row:2;width:110px}.download{grid-column:2;grid-row:2;align-self:center}.faq{grid-template-columns:1fr}.frame-labels span{font-size:10px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="nav">
+      <a class="brand" href="/">Photo<span>2Reel</span></a>
+      <nav class="nav-links" aria-label="Main navigation"><a href="/">Home</a><a href="/image-to-video/">Image to video</a><a href="/studio/">Studio</a><a href="/about">About</a></nav>
+    </header>
+
+    <main>
+      <p class="crumb"><a href="/">Home</a> / Image to video / Frame planning</p>
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Image to video · framing</p>
+          <h1 id="page-title">Choose the frame before you generate.</h1>
+          <p class="lede">A crop can remove the subject, product label, or empty space your motion prompt depends on. Preview the same source image as portrait, square, and landscape first; then send the frame that fits the finished clip.</p>
+          <div class="answer"><b>Short answer</b><p>Pick the destination frame first. If one story needs several shapes, check each crop before rendering and make a separate source version when the subject no longer fits.</p></div>
+          <a class="button" href="#crop-planner">Preview my image</a>
+        </div>
+        <figure class="hero-figure">
+          <img src="/images/image-to-video-frame-planning.png" width="1792" height="1024" alt="One still-life photo shown in portrait, square, and landscape crops">
+          <figcaption class="frame-labels"><span>Portrait · 9:16</span><span>Square · 1:1</span><span>Landscape · 16:9</span></figcaption>
+        </figure>
+      </section>
+
+      <section class="section" id="crop-planner" aria-labelledby="planner-title">
+        <p class="label">Local crop preview</p>
+        <h2 id="planner-title">Check three frames from one photo</h2>
+        <p class="section-intro">Choose a source image, then adjust where the crop sits. This page previews and exports crops in your browser; the file is not uploaded to Photo2Reel.</p>
+        <div class="planner">
+          <div class="upload-row">
+            <input id="image-file" type="file" accept="image/*" aria-describedby="privacy-note status">
+            <label class="upload-label" for="image-file">Choose a source image</label>
+            <p class="privacy-note" id="privacy-note">Local preview · no upload</p>
+          </div>
+          <p class="status" id="status" role="status" aria-live="polite">Choose an image to compare the three crops.</p>
+          <div class="controls" aria-label="Crop alignment controls">
+            <div class="control"><label for="focus-x">Horizontal crop position <output id="focus-x-value" for="focus-x">50%</output></label><input id="focus-x" type="range" min="0" max="100" value="50"></div>
+            <div class="control"><label for="focus-y">Vertical crop position <output id="focus-y-value" for="focus-y">50%</output></label><input id="focus-y" type="range" min="0" max="100" value="50"></div>
+          </div>
+          <div class="previews">
+            <article class="preview-card" data-frame="portrait">
+              <h3>Portrait <span>9:16</span></h3>
+              <div class="frame portrait"><img alt="Portrait crop preview"><span class="placeholder">Preview</span></div>
+              <button class="download" type="button" disabled>Save portrait crop</button>
+            </article>
+            <article class="preview-card" data-frame="square">
+              <h3>Square <span>1:1</span></h3>
+              <div class="frame square"><img alt="Square crop preview"><span class="placeholder">Preview</span></div>
+              <button class="download" type="button" disabled>Save square crop</button>
+            </article>
+            <article class="preview-card" data-frame="landscape">
+              <h3>Landscape <span>16:9</span></h3>
+              <div class="frame landscape"><img alt="Landscape crop preview"><span class="placeholder">Preview</span></div>
+              <button class="download" type="button" disabled>Save landscape crop</button>
+            </article>
+          </div>
+        </div>
+        <div class="method" aria-label="Frame planning steps">
+          <article><h3>1. Name the delivery</h3><p>Write down where this clip will appear and which frame shape that destination expects. Confirm exact export settings in the generation service you use.</p></article>
+          <article><h3>2. Check the subject and edges</h3><p>Look for faces, hands, labels, and movement space near the crop boundary. A static preview reveals what the frame would cut away before a render.</p></article>
+          <article><h3>3. Reframe before adding motion</h3><p>If a needed detail falls outside one crop, adjust the crop or prepare a separate source image. Then write the motion direction for that composition.</p></article>
+        </div>
+        <p class="callout">These presets are comparison frames, not a promise that every generation service accepts every shape. Check the selected service’s current input and output controls before spending a render credit.</p>
+      </section>
+
+      <section class="section" aria-labelledby="why-title">
+        <p class="label">A small step with a long history</p>
+        <h2 id="why-title">Treat framing as part of the production plan</h2>
+        <p class="section-intro">A 2019 archived Wibbitz product page described preparing one story in square, vertical, and horizontal versions. That is a useful historical workflow detail: decide which frames the story needs while planning, instead of assuming one crop will suit every destination.</p>
+        <p class="body-copy">The archive is evidence about that product’s 2019 workflow, not a statement about today’s video services. This planner turns the idea into a practical check: compare the crop, move its focal position, and save a frame only after the important subject still fits.</p>
+        <p class="source">Source: <a href="https://arquivo.pt/wayback/20190909082045/https://www.wibbitz.com/" rel="nofollow">Wibbitz archived product page, 2019</a>. The description above is rewritten and attributed; no archived copy is reproduced.</p>
+        <div class="related"><a href="/image-to-video/">Build a clear image-to-video brief</a><a href="/image-to-video-landscape-motion/">Plan motion for a landscape image</a></div>
+      </section>
+
+      <section class="section" aria-labelledby="faq-title">
+        <p class="label">Questions before a render</p>
+        <h2 id="faq-title">Frame planning questions</h2>
+        <div class="faq">
+          <details><summary>Should I crop before or after image-to-video generation?</summary><p>Preview the intended frame before generation so the reference composition and motion direction match. If the generated service has its own aspect-ratio control, verify how it treats the input image; this page does not predict that service’s behavior.</p></details>
+          <details><summary>Does changing the crop create a new video?</summary><p>No. This browser tool creates still-image crops only. It does not generate motion, upload a file, or publish a clip.</p></details>
+          <details><summary>Can one image work for every frame shape?</summary><p>Sometimes. Compare the subject, important edges, and room for motion in each preview. If a required detail disappears in one frame, make a separate source composition for that version.</p></details>
+          <details><summary>Does this upload my photo?</summary><p>No. The selected file is decoded in this browser tab for preview and crop export. It is not sent to Photo2Reel.</p></details>
+        </div>
+      </section>
+    </main>
+
+    <footer><span>© 2026 Photo2Reel</span><nav aria-label="Footer navigation"><a href="/">Home</a><a href="/privacy">Privacy</a><a href="/contact">Contact</a></nav></footer>
+  </div>
+  <canvas id="crop-canvas" hidden></canvas>
+  <script>
+    (() => {
+      const fileInput = document.getElementById('image-file');
+      const status = document.getElementById('status');
+      const xInput = document.getElementById('focus-x');
+      const yInput = document.getElementById('focus-y');
+      const xValue = document.getElementById('focus-x-value');
+      const yValue = document.getElementById('focus-y-value');
+      const canvas = document.getElementById('crop-canvas');
+      const ctx = canvas.getContext('2d');
+      const frames = [
+        {name:'portrait', ratio:9 / 16, suffix:'portrait-9x16'},
+        {name:'square', ratio:1, suffix:'square-1x1'},
+        {name:'landscape', ratio:16 / 9, suffix:'landscape-16x9'}
+      ];
+      let bitmap = null;
+      let imageUrl = '';
+      let baseName = 'image';
+
+      function setPosition() {
+        const x = Number(xInput.value);
+        const y = Number(yInput.value);
+        xValue.value = `${x}%`;
+        yValue.value = `${y}%`;
+        document.querySelectorAll('.frame').forEach((frame) => {
+          frame.style.setProperty('--focus-x', `${x}%`);
+          frame.style.setProperty('--focus-y', `${y}%`);
+          const image = frame.querySelector('img');
+          image.style.objectPosition = `${x}% ${y}%`;
+        });
+      }
+
+      function updatePreviews() {
+        if (!bitmap) return;
+        document.querySelectorAll('.preview-card').forEach((card) => {
+          const frame = card.querySelector('.frame');
+          const image = frame.querySelector('img');
+          image.src = imageUrl;
+          frame.classList.add('has-image');
+        });
+        document.querySelectorAll('.download').forEach((button) => { button.disabled = false; });
+        setPosition();
+      }
+
+      fileInput.addEventListener('change', async () => {
+        const file = fileInput.files && fileInput.files[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/')) {
+          status.textContent = 'Choose an image file such as JPEG, PNG, or WebP.';
+          fileInput.value = '';
+          return;
+        }
+        try {
+          const nextBitmap = await createImageBitmap(file);
+          if (bitmap) bitmap.close();
+          if (imageUrl) URL.revokeObjectURL(imageUrl);
+          bitmap = nextBitmap;
+          imageUrl = URL.createObjectURL(file);
+          baseName = file.name.replace(/\.[^.]+$/, '').replace(/[^a-z0-9_-]+/gi, '-') || 'image';
+          status.textContent = `Ready: ${file.name} · ${bitmap.width} × ${bitmap.height} px. Adjust the crop, then save a frame.`;
+          updatePreviews();
+        } catch {
+          status.textContent = 'This browser could not read that image. Choose another file format.';
+        }
+      });
+
+      xInput.addEventListener('input', setPosition);
+      yInput.addEventListener('input', setPosition);
+
+      document.querySelectorAll('.preview-card').forEach((card) => {
+        card.querySelector('.download').addEventListener('click', () => {
+          if (!bitmap) return;
+          const frame = frames.find((item) => item.name === card.dataset.frame);
+          const sourceRatio = bitmap.width / bitmap.height;
+          let cropWidth = bitmap.width;
+          let cropHeight = bitmap.height;
+          if (sourceRatio > frame.ratio) cropWidth = cropHeight * frame.ratio;
+          else cropHeight = cropWidth / frame.ratio;
+          const left = (bitmap.width - cropWidth) * (Number(xInput.value) / 100);
+          const top = (bitmap.height - cropHeight) * (Number(yInput.value) / 100);
+          canvas.width = Math.max(1, Math.round(cropWidth));
+          canvas.height = Math.max(1, Math.round(cropHeight));
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(bitmap, left, top, cropWidth, cropHeight, 0, 0, canvas.width, canvas.height);
+          canvas.toBlob((blob) => {
+            if (!blob) {
+              status.textContent = 'The crop could not be exported. Try a smaller source image.';
+              return;
+            }
+            const link = document.createElement('a');
+            const downloadUrl = URL.createObjectURL(blob);
+            link.href = downloadUrl;
+            link.download = `${baseName}-${frame.suffix}.png`;
+            link.click();
+            setTimeout(() => URL.revokeObjectURL(downloadUrl), 1000);
+            status.textContent = `Saved ${frame.name} crop as a PNG on your device.`;
+          }, 'image/png');
+        });
+      });
+      setPosition();
+    })();
+  </script>
+</body>
+</html>
