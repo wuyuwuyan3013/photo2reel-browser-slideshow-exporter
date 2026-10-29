@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Learn how to make photos into a video with local timing, music, vertical or landscape framing, and MP4 export." />
+  <title>How to Make Photos Into a Video — Browser Guide</title>
+  <script>
+    const pageVariants = {
+      '/make-video-from-images/': { title: 'Make Video From Images — Free Local MP4 Maker', h1: 'Make video from images — privately in your browser.', desc: 'Make a video from images locally in your browser, add music, and export an MP4 without uploading your files.' },
+      '/how-to-make-photos-into-a-video/': { title: 'How to Make Photos Into a Video — Browser Guide', h1: 'How to make photos into a video — a private browser workflow.', desc: 'Learn how to make photos into a video with local timing, music, vertical or landscape framing, and MP4 export.' },
+      '/photo-to-video-ai/': { title: 'Photo to Video AI — Private Browser Alternative', h1: 'Photo to video AI — create the result on your device.', desc: 'Turn photos into a video with an AI-inspired local workflow: choose images, set timing, add music, and export MP4 without uploads.' },
+      '/create-slideshow/': { title: 'Create Slideshow — Free Local Video Maker', h1: 'Create a slideshow from photos — locally and privately.', desc: 'Create a slideshow in your browser, customize timing and music, and download an MP4 video.' },
+      '/video-maker-with-music/': { title: 'Video Maker with Music — Photo Video in Your Browser', h1: 'Video maker with music — turn photos into a soundtrack video.', desc: 'Make a music video from photos locally in your browser with adjustable timing and MP4 export.' },
+      '/make-photos-into-video/': { title: 'Make Photos Into Video — Private MP4 Export', h1: 'Make photos into video — with music and local rendering.', desc: 'Make an MP4 video from photos without uploading them, with timing, music, and vertical output controls.' }
+    };
+    const variant = pageVariants[location.pathname];
+    if (variant) document.addEventListener('DOMContentLoaded', () => { document.title = variant.title; document.querySelector('meta[name="description"]').content = variant.desc; const h1 = document.querySelector('h1'); if (h1) h1.textContent = variant.h1; });
+  </script>
+  <style>
+    :root { --ink:#f4f8ff; --muted:#aebbd4; --panel:#14213b; --panel-2:#1a2b4b; --line:rgba(205,222,255,.18); --aqua:#64f2d2; --blue:#6fa8ff; --hot:#ffba67; --danger:#ff8196; }
+    * { box-sizing:border-box; }
+    html { background:#091426; scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:radial-gradient(circle at 88% 4%, #253c75 0, transparent 29rem), radial-gradient(circle at 0 38%, #12354f 0, transparent 27rem), #091426; font:16px/1.55 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    button,input,select { font:inherit; }
+    button { cursor:pointer; }
+    .shell { width:min(1180px, calc(100% - 32px)); margin:auto; }
+    header { display:flex; justify-content:space-between; align-items:center; padding:26px 0 20px; gap:18px; }
+    .brand { color:var(--ink); font-weight:800; letter-spacing:-.04em; text-decoration:none; font-size:1.18rem; }
+    .brand i { color:var(--aqua); font-style:normal; }
+    .site-nav { display:flex; flex-wrap:wrap; justify-content:center; gap:13px; margin-left:auto; }
+    .site-nav a { color:var(--muted); text-decoration:none; font-size:.86rem; font-weight:700; }
+    .site-nav a:hover,.site-nav a:focus-visible { color:var(--aqua); }
+    .privacy-chip { color:#09231d; background:var(--aqua); border-radius:999px; padding:7px 11px; font-size:.78rem; font-weight:800; white-space:nowrap; }
+    .intro { display:grid; grid-template-columns:1fr auto; gap:24px; align-items:end; padding:28px 0 28px; }
+    h1 { font-size:clamp(2.15rem, 5vw, 4.5rem); letter-spacing:-.065em; line-height:.98; margin:0; max-width:840px; }
+    .intro p { color:var(--muted); font-size:1.08rem; max-width:700px; margin:18px 0 0; }
+    .local-note { max-width:205px; border-left:2px solid var(--hot); padding-left:12px; color:#ffe0bb; font-size:.87rem; }
+    .studio { background:rgba(14,29,53,.86); border:1px solid var(--line); border-radius:28px; box-shadow:0 24px 80px rgba(0,0,0,.28); overflow:hidden; }
+    .steps { display:grid; grid-template-columns:repeat(3,1fr); border-bottom:1px solid var(--line); }
+    .step { padding:14px 20px; color:var(--muted); font-size:.84rem; border-right:1px solid var(--line); }
+    .step:last-child { border:none; }.step b { color:var(--aqua); margin-right:6px; }
+    .workspace { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(330px,.9fr); }
+    .controls { padding:28px; border-right:1px solid var(--line); }
+    .preview { padding:28px; background:linear-gradient(145deg,rgba(40,72,126,.35),transparent); }
+    h2 { font-size:1.25rem; letter-spacing:-.03em; margin:0 0 10px; } h3 { font-size:1rem; margin:25px 0 9px; }
+    .sub { color:var(--muted); font-size:.92rem; margin:0 0 18px; }
+    .drop { display:grid; place-items:center; min-height:152px; padding:20px; border:1.5px dashed rgba(100,242,210,.6); background:rgba(100,242,210,.06); border-radius:18px; text-align:center; transition:.2s; }
+    .drop.drag { transform:scale(1.01); border-color:var(--aqua); background:rgba(100,242,210,.13); }.drop strong { display:block; font-size:1.05rem; }.drop small { color:var(--muted); display:block; margin:4px 0 13px; }
+    .button, .tiny-button { display:inline-flex; align-items:center; justify-content:center; border:0; border-radius:12px; font-weight:800; transition:transform .15s,filter .15s; }.button:hover,.tiny-button:hover { filter:brightness(1.1); transform:translateY(-1px); }
+    .button { padding:12px 16px; background:var(--aqua); color:#05211b; }.button.alt { background:rgba(255,255,255,.1); color:var(--ink); border:1px solid var(--line); }.button:disabled { cursor:not-allowed; filter:grayscale(.9); opacity:.5; transform:none; }
+    .photo-list { display:grid; gap:9px; margin-top:16px; }.photo-empty { color:var(--muted); text-align:center; padding:18px; font-size:.9rem; }
+    .photo { display:grid; grid-template-columns:48px 1fr 104px 32px; gap:10px; align-items:center; padding:8px; background:rgba(255,255,255,.055); border:1px solid transparent; border-radius:13px; }.photo:hover { border-color:var(--line); }.photo img { width:48px; height:48px; object-fit:cover; border-radius:8px; }.photo-name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:.86rem; }.photo label { color:var(--muted); font-size:.68rem; display:block; }.photo input { width:100%; accent-color:var(--aqua); }.photo input[type=number] { color:var(--ink); background:#0c1830; border:1px solid var(--line); border-radius:8px; padding:5px 7px; font-size:.82rem; }.remove { color:var(--danger); background:transparent; border:0; font-size:1.3rem; }
+    .music-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }.field { display:grid; gap:6px; }.field label { font-size:.78rem; color:var(--muted); }.field select,.field input[type=range] { width:100%; }.field select { color:var(--ink); background:#0c1830; border:1px solid var(--line); border-radius:10px; padding:10px; }.upload-audio { margin-top:10px; padding:10px; border:1px dashed var(--line); border-radius:10px; font-size:.84rem; color:var(--muted); }.upload-audio input { width:100%; margin-top:5px; }
+    .render-bar { display:flex; gap:10px; align-items:center; margin-top:26px; }.status { color:var(--muted); font-size:.8rem; }.status.error { color:#ff9cab; }.status.ok { color:var(--aqua); }
+    .canvas-wrap { position:relative; overflow:hidden; border-radius:18px; background:#050b17; aspect-ratio:16/9; border:1px solid var(--line); }.canvas-wrap.vertical { aspect-ratio:9/16; max-width:min(100%, 330px); margin-inline:auto; }.canvas-wrap canvas { display:block; width:100%; height:100%; }.preview-badge { position:absolute; top:10px; left:10px; padding:4px 8px; border-radius:7px; background:rgba(3,10,25,.72); font-size:.7rem; color:var(--muted); }.project-details { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:15px 0 21px; }.metric { padding:11px; background:rgba(255,255,255,.055); border-radius:12px; }.metric span { display:block; font-size:.73rem; color:var(--muted); }.metric b { font-size:1rem; }.download { display:none; width:100%; text-decoration:none; margin-top:14px; }.download.show { display:flex; }
+    .privacy { display:grid; grid-template-columns:auto 1fr; gap:12px; border-top:1px solid var(--line); margin-top:27px; padding-top:20px; }.privacy .lock { font-size:1.25rem; }.privacy p { color:var(--muted); margin:3px 0 0; font-size:.85rem; }
+    .article { padding:68px 0 76px; max-width:850px; }.article h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin-bottom:18px; }.article h3 { font-size:1.2rem; margin-top:30px; }.article p { color:#c7d2e7; }.article strong { color:var(--ink); }.benefits { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:26px 0 34px; }.benefit { background:rgba(255,255,255,.055); padding:13px; border-radius:12px; border:1px solid var(--line); font-size:.83rem; }.benefit b { color:var(--aqua); display:block; font-size:.92rem; }
+    footer { color:var(--muted); border-top:1px solid var(--line); padding:22px 0 34px; font-size:.8rem; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    footer .site-nav { margin-left:0; justify-content:flex-end; }
+    @media (max-width:780px) { .shell{width:min(100% - 24px, 620px)} header{padding-top:17px;align-items:flex-start}.site-nav{order:3;width:100%;justify-content:flex-start;gap:11px}.privacy-chip{font-size:.7rem}.intro{display:block;padding:20px 0}.local-note{margin-top:18px;max-width:none}.steps{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line);padding:10px 16px}.step:last-child{border-bottom:0}.workspace{grid-template-columns:1fr}.controls{border-right:0;border-bottom:1px solid var(--line);padding:20px}.preview{padding:20px}.photo{grid-template-columns:44px 1fr 84px 28px}.photo img{width:44px;height:44px}.music-grid{grid-template-columns:1fr}.article{padding:46px 0}.benefits{grid-template-columns:1fr 1fr}.render-bar{align-items:flex-start;flex-direction:column}.button{width:100%}footer{display:block}footer .site-nav{margin-top:12px;justify-content:flex-start} }
+  </style>
+</head>
+<body>
+  <main class="shell">
+<header><a class="brand" href="/">Photo<i>2Reel</i></a><nav class="site-nav" aria-label="Site navigation"><a href="/">Tool</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/contact">Contact</a></nav><span class="privacy-chip">LOCAL • PRIVATE • FREE</span></header>
+    <section class="intro">
+      <div><h1>How to make photos into a video — a private browser workflow.</h1><p>Upload photos, set the time for each image, add music, then download your slideshow. Everything is created in your browser.</p></div>
+      <div class="local-note">No account. No watermark. Your photos never leave this device.</div>
+    </section>
+
+    <section class="studio" id="tool" aria-label="Image to video free slideshow maker">
+      <div class="steps"><div class="step"><b>01</b>Add photos</div><div class="step"><b>02</b>Set timing & music</div><div class="step"><b>03</b>Create & download</div></div>
+      <div class="workspace">
+        <div class="controls">
+          <h2>Your photo sequence</h2><p class="sub">Add two or more images. Tap a duration to tailor every scene.</p>
+          <div class="drop" id="dropZone"><div><strong>Drop photos here</strong><small>JPG, PNG, WebP, HEIC where your browser supports it</small><label class="button" for="imageInput">Choose photos</label><input id="imageInput" type="file" accept="image/*" multiple hidden></div></div>
+          <div class="photo-list" id="photoList"><div class="photo-empty">Your selected photos will appear here.</div></div>
+          <h3>Video format</h3>
+          <div class="field"><label for="aspectRatio">Frame</label><select id="aspectRatio"><option value="16:9">Landscape · 1280 × 720 (16:9)</option><option value="9:16">Vertical · 1080 × 1920 (9:16)</option></select></div>
+          <h3>Music</h3>
+          <div class="music-grid"><div class="field"><label for="musicType">Soundtrack</label><select id="musicType"><option value="none">No music</option><option value="ambient">Soft ambient tone</option><option value="pulse">Warm pulse</option><option value="upload">Upload my audio</option></select></div><div class="field"><label for="volume">Music volume</label><input id="volume" type="range" min="0" max="100" value="55"><output id="volumeValue">55%</output></div></div>
+          <div class="upload-audio" id="audioUpload" hidden><label for="audioInput">Choose an MP3, M4A, WAV, or other browser-playable audio file.</label><input id="audioInput" type="file" accept="audio/*"></div>
+          <div class="render-bar"><button class="button" id="renderBtn" disabled>Create video</button><span class="status" id="status" role="status">Add photos to begin.</span></div>
+        </div>
+        <div class="preview">
+          <h2>Preview</h2><p class="sub" id="resolutionNote">Your video is rendered locally at 1280 × 720 (16:9).</p>
+          <div class="canvas-wrap"><canvas id="canvas" width="1280" height="720"></canvas><span class="preview-badge">LOCAL PREVIEW</span></div>
+          <div class="project-details"><div class="metric"><span>Photos</span><b id="photoCount">0</b></div><div class="metric"><span>Video length</span><b id="totalLength">0 sec</b></div></div>
+          <a class="button alt download" id="downloadLink" download>Download video</a>
+          <div class="privacy"><div class="lock">⌁</div><div><b>Private by design</b><p>Image files, audio, and the finished video stay in this browser session. This page has no upload endpoint and no account system.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <article class="article">
+      <h2>How to make photos into a video, one deliberate scene at a time</h2>
+      <p><strong>Making photos into a video is less about adding effects and more about giving a set of still moments a clear order, pace, and destination.</strong> Pick the images that belong together, decide what the first and final frame should communicate, and let this browser-based maker turn the sequence into a shareable MP4. It works well for a weekend recap, a process walkthrough, a before-and-after story, or a small collection of images that deserves more than a swipe-through.</p>
+      <div class="benefits"><div class="benefit"><b>On-device assembly</b>Put the sequence together in your browser.</div><div class="benefit"><b>Pacing controls</b>Set viewing time for every photo.</div><div class="benefit"><b>Flexible finish</b>Choose a quiet cut or add sound.</div><div class="benefit"><b>Ready-to-save MP4</b>Keep the completed video when it is ready.</div></div>
+      <h3>Start with the story you want the photos to tell</h3>
+      <p>Gather the photos first, then add only the ones that move the viewer forward. A strong opening image establishes the place, person, or subject. The middle can show variety or progression, while the final image gives the video a natural stopping point. In the photo list, check that this order feels intentional before you start rendering.</p>
+      <h3>Give important images a little more room</h3>
+      <p>Not every photo needs the same amount of screen time. Use a brief hold for a simple transition shot and a longer one for text, a group portrait, or a detail worth noticing. A useful starting rhythm is two seconds for quick context and three or four seconds for images people may want to study. Small timing changes often make the whole video feel more composed.</p>
+      <h3>Match the frame to where the video will be watched</h3>
+      <p>Choose the wide frame when the photos are mostly horizontal or the finished video will live on a computer screen. Pick the vertical frame for phone-first viewing and portrait-heavy collections. The preview shows the chosen shape before export, so you can see whether each image has the breathing room it needs instead of discovering a poor crop after the file is made.</p>
+      <h3>Make the soundtrack support the sequence</h3>
+      <p>A silent version can be the clearest choice for a presentation or for footage that will receive narration later. If music suits the project, select one of the built-in sounds or use an audio file you already have permission to use. Keep the volume restrained enough that the pictures remain the focus, and consider letting the last frame hold long enough for the sound to resolve.</p>
+      <p>If the music is the part you want to get right, <a href="/how-to-make-a-slideshow-with-music/">how to make a slideshow with music</a> covers track length, volume and beat alignment in more detail.</p>
+      <h3>Create the video and review the final pass</h3>
+      <p>When the sequence, timing, framing, and sound are set, select Create video. The page records the finished slideshow locally and prepares an MP4 download. Before sharing it, play the file once from beginning to end: look for a rushed image, a frame that needs a different orientation, or an ending that would benefit from one more second. That quick review is usually all a photo collection needs to become a finished video.</p>
+      <p>When you are ready to build it, <a href="/">make a video from photos</a> takes you straight to the tool.</p>
+    </article>
+<footer><span>© 2026 Photo2Reel by an independent developer.</span><nav class="site-nav" aria-label="Footer navigation"><a href="/">Tool</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/contact">Contact</a></nav><p>This site will display third-party ads, and some links may be affiliate links that earn us a commission if you make a purchase.</p></footer>
+  </main>
+  <script type="module">
+    (() => {
+      const $ = s => document.querySelector(s);
+      const imageInput = $('#imageInput'), audioInput = $('#audioInput'), dropZone = $('#dropZone'), photoList = $('#photoList');
+      const musicType = $('#musicType'), audioUpload = $('#audioUpload'), volume = $('#volume'), volumeValue = $('#volumeValue');
+      const aspectRatio = $('#aspectRatio'), resolutionNote = $('#resolutionNote'), canvasWrap = $('.canvas-wrap');
+      const canvas = $('#canvas'), ctx = canvas.getContext('2d'), renderBtn = $('#renderBtn'), status = $('#status'), downloadLink = $('#downloadLink');
+      const photoCount = $('#photoCount'), totalLength = $('#totalLength');
+      let photos = [], audioFile = null, resultUrl = null, busy = false, ffmpeg = null;
+      const fmt = n => `${Math.round(n * 10) / 10} sec`;
+      const setStatus = (text, kind='') => { status.textContent = text; status.className = `status ${kind}`; };
+      const getTotal = () => photos.reduce((sum, p) => sum + p.duration, 0);
+      function fit(image) {
+        const iw = image.width || image.naturalWidth, ih = image.height || image.naturalHeight, cw = canvas.width, ch = canvas.height;
+        ctx.fillStyle = '#060c19'; ctx.fillRect(0,0,cw,ch);
+        const scale = Math.min(cw / iw, ch / ih), w = iw * scale, h = ih * scale;
+        ctx.drawImage(image, (cw-w)/2, (ch-h)/2, w, h);
+      }
+      function setFrame() {
+        const vertical = aspectRatio.value === '9:16';
+        canvas.width = vertical ? 1080 : 1280;
+        canvas.height = vertical ? 1920 : 720;
+        canvasWrap.classList.toggle('vertical', vertical);
+        resolutionNote.textContent = vertical ? 'Your video is rendered locally at 1080 × 1920 (9:16).' : 'Your video is rendered locally at 1280 × 720 (16:9).';
+        drawPreview();
+      }
+      function drawPreview(index=0) { if (!photos[index]) { ctx.fillStyle='#071226'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.fillStyle='#aebbd4'; ctx.textAlign='center'; ctx.font='32px system-ui'; ctx.fillText('Your slideshow preview', canvas.width/2, canvas.height/2); return; } fit(photos[index].image); }
+      function refresh() {
+        photoCount.textContent = photos.length; totalLength.textContent = fmt(getTotal()); renderBtn.disabled = photos.length < 1 || busy;
+        photoList.innerHTML = photos.length ? '' : '<div class="photo-empty">Your selected photos will appear here.</div>';
+        photos.forEach((photo, index) => {
+          const row = document.createElement('div'); row.className='photo';
+          row.innerHTML = `<img src="${photo.url}" alt="Selected photo ${index+1}"><span class="photo-name" title="${photo.file.name}">${index+1}. ${photo.file.name}</span><label>Seconds<input aria-label="Duration for ${photo.file.name}" type="number" min="1" max="30" step="0.5" value="${photo.duration}"></label><button class="remove" title="Remove photo" aria-label="Remove ${photo.file.name}">×</button>`;
+          row.querySelector('input').addEventListener('change', e => { photo.duration = Math.max(1, Math.min(30, Number(e.target.value) || 3)); e.target.value=photo.duration; refresh(); });
+          row.querySelector('.remove').addEventListener('click', () => { URL.revokeObjectURL(photo.url); photos.splice(index,1); refresh(); drawPreview(); }); photoList.append(row);
+        });
+        drawPreview();
+      }
+      async function addFiles(files) {
+        const valid = [...files].filter(f => f.type.startsWith('image/'));
+        if (!valid.length) { setStatus('Choose image files such as JPG, PNG, or WebP.', 'error'); return; }
+        for (const file of valid) { const url = URL.createObjectURL(file); const image = new Image(); image.src=url; try { await image.decode(); photos.push({file,url,image,duration:3}); } catch { URL.revokeObjectURL(url); } }
+        setStatus(`${valid.length} photo${valid.length===1?'':'s'} added.`, 'ok'); refresh();
+      }
+      imageInput.addEventListener('change', e => addFiles(e.target.files));
+      ['dragenter','dragover'].forEach(type => dropZone.addEventListener(type,e=>{e.preventDefault();dropZone.classList.add('drag')}));
+      ['dragleave','drop'].forEach(type => dropZone.addEventListener(type,e=>{e.preventDefault();dropZone.classList.remove('drag')}));
+      dropZone.addEventListener('drop', e => addFiles(e.dataTransfer.files));
+      musicType.addEventListener('change', () => { audioUpload.hidden = musicType.value !== 'upload'; if(musicType.value !== 'upload') audioFile=null; });
+      audioInput.addEventListener('change', e => { audioFile=e.target.files[0]||null; if(audioFile) setStatus(`Audio ready: ${audioFile.name}`, 'ok'); });
+      volume.addEventListener('input', () => volumeValue.textContent=`${volume.value}%`);
+      aspectRatio.addEventListener('change', setFrame);
+      function recordingMime() {
+        if (!window.MediaRecorder) return '';
+        return ['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].find(x => MediaRecorder.isTypeSupported(x)) || '';
+      }
+      async function mp4Converter() {
+        if (ffmpeg) return ffmpeg;
+        const [{ FFmpeg }, { toBlobURL }] = await Promise.all([
+          import('https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/esm/index.js'),
+          import('https://cdn.jsdelivr.net/npm/@ffmpeg/util@0.12.1/dist/esm/index.js')
+        ]);
+        ffmpeg = new FFmpeg();
+        await ffmpeg.load({
+          classWorkerURL: new URL('./vendor/ffmpeg-worker.js', import.meta.url).href,
+          coreURL: await toBlobURL('https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/esm/ffmpeg-core.js', 'text/javascript'),
+          wasmURL: await toBlobURL('https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/esm/ffmpeg-core.wasm', 'application/wasm')
+        });
+        return ffmpeg;
+      }
+      async function transcodeToMp4(recording) {
+        const converter = await mp4Converter();
+        await converter.writeFile('photo-slideshow.webm', new Uint8Array(await recording.arrayBuffer()));
+        await converter.exec(['-i', 'photo-slideshow.webm', '-map', '0:v:0', '-map', '0:a?', '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-movflags', '+faststart', 'photo-slideshow.mp4']);
+        const output = await converter.readFile('photo-slideshow.mp4');
+        await Promise.allSettled([converter.deleteFile('photo-slideshow.webm'), converter.deleteFile('photo-slideshow.mp4')]);
+        return new Blob([output], {type:'video/mp4'});
+      }
+      function sleep(ms) { return new Promise(r=>setTimeout(r,ms)); }
+      function makeTone(context, destination, type, gainValue, totalMs) {
+        const gain=context.createGain(); gain.gain.value=gainValue; gain.connect(destination); const start=context.currentTime+.05;
+        const frequencies=type==='pulse'?[220,293.66,329.63,293.66]:[174.61,220,261.63,196];
+        for(let i=0;i<Math.ceil(totalMs/900)+1;i++){ const osc=context.createOscillator(), envelope=context.createGain(), when=start+i*.9; osc.type=type==='pulse'?'sine':'triangle'; osc.frequency.value=frequencies[i%frequencies.length]; envelope.gain.setValueAtTime(0.0001,when); envelope.gain.exponentialRampToValueAtTime(type==='pulse'?0.13:0.045,when+.08); envelope.gain.exponentialRampToValueAtTime(0.0001,when+.84); osc.connect(envelope).connect(gain); osc.start(when); osc.stop(when+.9); }
+      }
+      async function renderVideo() {
+        if (!photos.length || busy) return;
+        if (!window.MediaRecorder || !canvas.captureStream) { setStatus('This browser cannot create local video here. Try the latest Chrome, Edge, or Safari.', 'error'); return; }
+        const mime = recordingMime(); if (!mime) { setStatus('No local recording format is available. Try the latest Chrome or Edge.', 'error'); return; }
+        if (musicType.value==='upload' && !audioFile) { setStatus('Choose an audio file or select another soundtrack.', 'error'); return; }
+        busy=true; refresh(); downloadLink.classList.remove('show'); if(resultUrl) URL.revokeObjectURL(resultUrl);
+        const totalMs=getTotal()*1000; setStatus('Preparing your local video…');
+        try {
+          const stream=canvas.captureStream(30), audioContext=new (window.AudioContext||window.webkitAudioContext)(), destination=audioContext.createMediaStreamDestination();
+          let audioElement, sourceNode;
+          const gain=audioContext.createGain(); gain.gain.value=Number(volume.value)/100; gain.connect(destination);
+          if(musicType.value==='upload') { audioElement=new Audio(URL.createObjectURL(audioFile)); audioElement.loop=true; audioElement.crossOrigin='anonymous'; sourceNode=audioContext.createMediaElementSource(audioElement); sourceNode.connect(gain); await audioContext.resume(); await audioElement.play(); }
+          else if(musicType.value!=='none') { await audioContext.resume(); makeTone(audioContext, destination, musicType.value, Number(volume.value)/100, totalMs); }
+          destination.stream.getAudioTracks().forEach(track=>stream.addTrack(track));
+          const chunks=[], recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:5_000_000}); recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+          const complete=new Promise(resolve=>recorder.onstop=resolve); recorder.start(250); const started=performance.now();
+          for(let i=0;i<photos.length;i++){ fit(photos[i].image); const due=(started+photos.slice(0,i+1).reduce((sum,p)=>sum+p.duration*1000,0))-performance.now(); setStatus(`Rendering photo ${i+1} of ${photos.length}…`); if(due>0) await sleep(due); }
+          recorder.stop(); await complete; if(audioElement){audioElement.pause();URL.revokeObjectURL(audioElement.src);} await audioContext.close();
+          setStatus('Converting your local recording to MP4…'); const mp4 = await transcodeToMp4(new Blob(chunks,{type:'video/webm'})); resultUrl=URL.createObjectURL(mp4); downloadLink.href=resultUrl; downloadLink.download='photo-slideshow.mp4'; downloadLink.textContent='Download video (MP4)'; downloadLink.classList.add('show'); setStatus(`Video ready — ${fmt(getTotal())}, MP4.`, 'ok');
+        } catch(error) { console.error(error); setStatus(`Could not create the video: ${error.message || 'unknown browser error'}`, 'error'); }
+        finally { busy=false; refresh(); }
+      }
+      renderBtn.addEventListener('click', renderVideo); setFrame();
+    })();
+  </script>
+</body>
+</html>

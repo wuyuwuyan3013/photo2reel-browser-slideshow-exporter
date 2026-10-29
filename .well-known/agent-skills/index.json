@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "photo-to-video",
+      "type": "skill-md",
+      "description": "Create a local slideshow video from a sequence of photos with per-image timing, optional audio, and a selectable frame orientation.",
+      "url": "https://photo2reel.com/.well-known/agent-skills/photo-to-video/SKILL.md",
+      "digest": "sha256:d88425dae160850eb5e1ce50a9b3eb1261e7417bce841b07cbbd3fbeca9b3274"
+    }
+  ]
+}

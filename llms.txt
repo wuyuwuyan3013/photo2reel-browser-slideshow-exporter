@@ -1,0 +1,15 @@
+# Photo2Reel
+
+Photo2Reel has a new short-video planning studio preview and an existing browser-local slideshow exporter.
+
+## Available tools
+
+- [Image-to-video planning](https://photo2reel.com/image-to-video/): a plain-language image-to-video landing page that describes the Studio workflow, the public service boundary, and links to the relevant troubleshooting guides.
+- [Studio preview](https://photo2reel.com/studio/): plan a single-image clip or multi-scene storyboard, write motion prompts and prepare a publishing plan. This preview saves local drafts; AI generation and social account connections are not configured.
+- [Local slideshow maker](https://photo2reel.com/slideshow/): choose local images, set per-image duration, add optional audio and export a video in the browser.
+- [Privacy](https://photo2reel.com/privacy): data-handling information.
+- [Expanded overview](https://photo2reel.com/llms-full.txt)
+
+## Limits
+
+The studio does not currently call AI video APIs, connect social accounts or publish posts. Local video export is available in the separate slideshow maker and depends on browser media support and device resources.

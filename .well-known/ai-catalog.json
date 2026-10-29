@@ -1,0 +1,30 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Photo2Reel",
+    "identifier": "did:web:photo2reel.com"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:photo2reel.com:skill:photo-to-video",
+      "displayName": "Photo2Reel local photo slideshow workflow",
+      "type": "text/markdown",
+      "url": "https://photo2reel.com/.well-known/agent-skills/photo-to-video/SKILL.md",
+      "representativeQueries": [
+        "How do I turn a sequence of photos into a slideshow video privately?",
+        "How can I set a different duration for each photo in a video?",
+        "How can I add local music to a photo slideshow?"
+      ]
+    },
+    {
+      "identifier": "urn:air:photo2reel.com:resource:overview",
+      "displayName": "Photo2Reel machine-readable overview",
+      "type": "text/plain",
+      "url": "https://photo2reel.com/llms-full.txt",
+      "representativeQueries": [
+        "What does Photo2Reel do?",
+        "Does Photo2Reel upload my photos?"
+      ]
+    }
+  ]
+}

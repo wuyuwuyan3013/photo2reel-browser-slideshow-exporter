@@ -1,0 +1,23 @@
+# Photo2Reel expanded overview
+
+## Available now
+
+The studio preview at /studio/ lets users prepare a one-image video brief or a multi-scene storyboard. A scene has an image, a motion prompt and a duration. Users can prepare captions, target channels and a publishing time. A saved plan is a local draft, not a generated or published video.
+
+The separate maker at /slideshow/ renders a sequence of local images and optional audio to a downloadable video in the active browser. It is not a generative video model.
+
+## Integration status
+
+AI video generation, social account authorization, server scheduling and direct social publishing are not configured in the studio preview. No generated result, connected account or successful publishing receipt is simulated.
+
+## Privacy
+
+The preview does not transmit user assets to an AI service or social platform. Local draft storage and its limitations are explained in the studio. The local slideshow maker uses browser memory and media APIs; rendering performance depends on the device and project.
+
+## Pages
+
+- https://photo2reel.com/
+- https://photo2reel.com/image-to-video/
+- https://photo2reel.com/studio/
+- https://photo2reel.com/slideshow/
+- https://photo2reel.com/privacy

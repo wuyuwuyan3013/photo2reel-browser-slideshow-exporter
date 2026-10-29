@@ -1,0 +1,12 @@
+# 2026-10-25：工具意图五个变体页合并到首页，全部直达，不串两跳
+/photo-to-video-ai/ / 301
+/create-slideshow/ / 301
+/video-maker-with-music/ / 301
+/make-photos-into-video/ / 301
+/make-video-from-images/ / 301
+
+# 历史别名，原本指向上面那几个页面；一并直达首页，否则会变成两跳
+/photo-video-maker/ / 301
+/photo-slideshow-maker/ / 301
+/create-video-from-photos/ / 301
+/instagram-slideshow/ / 301

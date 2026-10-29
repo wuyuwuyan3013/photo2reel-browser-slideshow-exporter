@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Create a short video · Photo2Reel Studio</title>
+  <meta name="description" content="Plan a short video from a photo or storyboard, write motion prompts, prepare captions and choose publishing destinations.">
+  <link rel="stylesheet" href="studio.css">
+  <link rel="stylesheet" href="demand.css">
+  <script src="studio.js" defer></script>
+  <script src="generation.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../"><span class="brand-icon" aria-hidden="true">↗</span>photo<span>2</span>reel<span class="brand-tag">STUDIO</span></a>
+    <nav aria-label="Main navigation"><a class="active" href="#workspace">Create</a><button id="projectsBtn">Projects <span id="projectCount">0</span></button><button id="connectionsBtn">Connections</button></nav>
+    <span class="prototype"><span></span> Prototype mode</span>
+  </header>
+  <main>
+    <div class="page-heading"><div><p class="eyebrow">PHOTO-LED STORIES FOR CREATORS & SMALL BRANDS</p><h1>Keep the subject.<br><span>Build the whole short.</span></h1><p class="lede">Start with a scene recipe, carry your details across shots, and prepare each channel before you spend on generation.</p></div><div class="heading-note"><span class="note-mark">✦</span><p>One draft first.<br>A clear plan for every channel.</p></div></div>
+    <div class="project-toolbar"><div class="project-title"><label for="projectName">PROJECT</label><input id="projectName" value="Untitled short" maxlength="80" aria-label="Project name"></div><div class="toolbar-actions"><span id="saveStatus" role="status">Not saved yet</span><button class="text-button" id="exportBtn">Export brief ↓</button><button class="button secondary compact" id="saveBtn">Save draft</button></div></div>
+    <div class="workspace" id="workspace">
+      <section class="editor" aria-label="Video brief editor">
+        <section class="editor-section">
+          <div class="section-title"><span class="step-number">01</span><div><h2>Start with your images</h2><p>One strong image, or a sequence with a story to tell.</p></div></div>
+          <div class="mode-switch" role="group" aria-label="Creation mode"><button id="singleMode" class="selected" aria-pressed="true"><span>▧</span> Single photo</button><button id="storyMode" aria-pressed="false"><span>▤</span> Storyboard</button></div>
+          <div class="recipe-row"><label for="sceneRecipe">Start from a scene recipe<select id="sceneRecipe"><option value="product">Product showcase</option><option value="creator">Creator mini-story</option><option value="travel">Travel recap</option></select></label><button class="button secondary compact" id="applyRecipeBtn" type="button">Fill empty prompts</button><p>With one image, a recipe prepares three draft scenes. Your existing prompts stay intact.</p></div>
+          <label class="drop-zone" id="dropZone" for="photoInput" tabindex="0" role="button"><span class="upload-icon" aria-hidden="true">↥</span><strong>Drop your images here</strong><span>or <b>browse files</b> · JPG, PNG, WebP</span><small>Images stay on this device while you plan.</small></label><input id="photoInput" type="file" accept="image/jpeg,image/png,image/webp,image/avif" multiple hidden>
+          <div class="scene-list" id="sceneList"></div>
+          <p class="empty-hint" id="emptyHint">Your first image becomes the opening scene.</p>
+        </section>
+        <section class="editor-section">
+          <div class="section-title"><span class="step-number">02</span><div><h2>Set the feel</h2><p>Choose a starting point for the finished video.</p></div></div>
+          <label class="field-label" for="subjectNotes">Details to carry through every scene</label><textarea id="subjectNotes" rows="3" maxlength="1200" placeholder="For example: The same amber bottle, white label and black cap. Keep the brand text and packaging shape unchanged."></textarea><p class="field-note">These shared instructions are included in every scene brief. Generated results will still need a visual check; this is not a guarantee of unchanged pixels.</p>
+          <div class="fields three"><label>Visual style<select id="visualStyle"><option value="cinematic">Cinematic</option><option value="clean-product">Clean product</option><option value="editorial">Editorial</option><option value="playful">Playful</option><option value="natural">Natural</option></select></label><label>Aspect ratio<select id="aspectRatio"><option value="9:16">9:16 · Vertical</option><option value="1:1">1:1 · Square</option><option value="16:9">16:9 · Landscape</option></select></label><label>Default scene length<select id="defaultDuration"><option value="5">5 seconds</option><option value="8">8 seconds</option><option value="10">10 seconds</option></select></label></div>
+          <p class="field-note">These are your creative preferences. Available settings will depend on the generation service connected later.</p>
+          <div class="budget-box"><h3>Start small, review the cost</h3><div class="fields two"><label>Generation plan<select id="generationScope"><option value="one-scene">One selected scene first</option><option value="all-scenes">All scenes after review</option></select></label><label>Your project budget cap (USD)<input id="budgetCap" type="number" min="0.01" max="10000" step="0.01" placeholder="Set your own limit"></label></div><p><b>No quote available yet.</b> This saves a budget preference only. A connected service must return a price and enforce your limit before any generation can start.</p></div>
+        </section>
+        <section class="editor-section" id="channels">
+          <div class="section-title"><span class="step-number">03</span><div><h2>Make it ready to share</h2><p>Write your post once, then choose where it belongs.</p></div></div>
+          <label class="field-label" for="postCaption">Post caption</label><textarea id="postCaption" rows="3" maxlength="2200" placeholder="A hook, a little context, and a reason to watch…"></textarea><div class="caption-meta"><span>Editable publishing copy</span><span><span id="captionCount">0</span>/2,200</span></div>
+          <fieldset class="channels"><legend>Destinations</legend><label><input type="checkbox" value="tiktok"><span class="channel-icon dark">♪</span><span>TikTok<small>Not connected</small></span><span class="checkbox-mark"></span></label><label><input type="checkbox" value="instagram"><span class="channel-icon pink">◎</span><span>Instagram Reels<small>Not connected</small></span><span class="checkbox-mark"></span></label><label><input type="checkbox" value="youtube"><span class="channel-icon red">▶</span><span>YouTube Shorts<small>Not connected</small></span><span class="checkbox-mark"></span></label><label><input type="checkbox" value="facebook"><span class="channel-icon blue">f</span><span>Facebook Reels<small>Not connected</small></span><span class="checkbox-mark"></span></label></fieldset>
+          <div id="channelDrafts" class="channel-drafts" aria-label="Channel-specific drafts"></div>
+          <fieldset class="timing"><legend>Publishing time</legend><label><input type="radio" name="publishTime" value="now" checked> When the video is ready</label><label><input type="radio" name="publishTime" value="scheduled"> Schedule for later</label></fieldset><div class="schedule-field" id="scheduleField" hidden><label for="scheduledAt">Date and time</label><input type="datetime-local" id="scheduledAt"><small id="timezoneNote"></small></div>
+        </section>
+      </section>
+      <aside class="preview-panel" aria-label="Storyboard preview">
+        <div class="preview-header"><div><p class="eyebrow">THE BIG PICTURE</p><h2>Your video brief</h2></div><span class="draft-badge">DRAFT</span></div>
+        <div class="preview-stage" id="previewStage"><div class="preview-empty" id="previewEmpty"><svg viewBox="0 0 160 160" aria-hidden="true"><rect x="32" y="19" width="96" height="124" rx="20" fill="#e8e1f9" transform="rotate(-8 80 80)"/><rect x="37" y="15" width="96" height="124" rx="20" fill="#f7f3ff" stroke="#bdb0df"/><circle cx="105" cy="49" r="11" fill="#c1a6ed"/><path d="M48 111L76 75L93 95L106 81L123 111" fill="none" stroke="#8b6ab4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M133 20v20m-10-10h20" stroke="#9272bd" stroke-width="4" stroke-linecap="round"/></svg><b>Your story, in the frame.</b><p>Add an image to start building<br>your first scene.</p></div><img id="previewImage" alt="Selected scene" hidden><div class="preview-overlay" id="previewOverlay" hidden><span id="previewSceneLabel">SCENE 01</span><b id="previewPrompt"></b></div><span class="preview-format" id="previewFormat">9:16</span></div>
+        <div class="preview-meta"><span><b id="sceneCount">0</b> scenes</span><span class="meta-dot">·</span><span><b id="totalDuration">0</b>s planned</span><span class="meta-dot">·</span><span id="styleSummary">Cinematic</span></div>
+        <div class="story-strip" id="storyStrip" aria-label="Scene thumbnails"></div>
+        <div class="pipeline"><div><span class="pipeline-dot done"></span><p>Creative brief<small>Images, direction & copy</small></p><b id="briefStatus">In progress</b></div><div><span class="pipeline-dot"></span><p>AI generation<small>Private owner pilot</small></p><b id="generationPipelineStatus">Checking</b></div><div><span class="pipeline-dot"></span><p>Publishing<small>Authorize your channels</small></p><b>Not connected</b></div></div>
+        <button class="button primary readiness" id="readinessBtn">Review before generation <span>↗</span></button>
+        <button class="button secondary readiness" id="openGenerationBtn" type="button" style="margin-top:10px">AI generation setup <span>→</span></button>
+        <p id="generationAvailability" class="honest-note" role="status">Checking generation service configuration…</p>
+        <p class="honest-note">Drafts and images are saved locally. Optional AI generation needs private owner authorization and a configured service; direct social publishing is not connected.</p>
+      </aside>
+    </div>
+    <footer><span>Photo2Reel · A little direction goes a long way.</span><span>Local drafts. Your creative control.</span></footer>
+  </main>
+  <dialog id="statusDialog"><div class="dialog-top"><div><p class="eyebrow">BEFORE YOU GENERATE</p><h2 id="dialogTitle">Project readiness</h2></div><button class="icon-button" id="closeStatus" aria-label="Close readiness dialog">×</button></div><div id="readinessResults"></div><p class="dialog-footnote">No generation or publishing request has been sent.</p><button class="button secondary" id="closeStatusBottom">Back to brief</button></dialog>
+  <dialog id="projectsDialog"><div class="dialog-top"><div><p class="eyebrow">SAVED ON THIS DEVICE</p><h2>Your projects</h2></div><button class="icon-button" id="closeProjects" aria-label="Close projects dialog">×</button></div><div id="projectList"></div><p class="dialog-footnote">Drafts include the images you selected. Browser storage can be cleared by you or your browser. Export a brief to keep a separate copy.</p></dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <dialog id="generationDialog"><div class="dialog-top"><div><p class="eyebrow">PRIVATE OWNER PILOT</p><h2>Generate one scene</h2></div><button class="icon-button" id="closeGenerationBtn" aria-label="Close generation panel">×</button></div>
+    <p class="dialog-footnote">This pilot supports Runway Gen-4 Turbo clips of 5 or 10 seconds. Public customer accounts, billing and automatic social posting are not enabled.</p>
+    <label class="field-label" for="studioAccessToken">Private studio access token</label><input id="studioAccessToken" type="password" autocomplete="off" spellcheck="false" placeholder="Configured by the site owner" style="width:100%;padding:10px;margin-top:6px;border:1px solid #ddd;border-radius:7px"><p class="dialog-footnote">Kept in this page’s memory only. Never enter the Runway provider API secret here.</p>
+    <p class="dialog-footnote">The estimate sends the selected image and combined prompt to Photo2Reel. Only the confirmation below sends them to Runway and starts a chargeable task. Estimates use a dated published tariff, exclude tax and are not a guarantee of the final invoice.</p>
+    <button class="button secondary" id="requestEstimateBtn" type="button">Estimate selected scene</button>
+    <div id="generationEstimate" class="dialog-footnote"></div>
+    <label class="dialog-footnote" style="display:block"><input id="generationConsent" type="checkbox"> I approve this estimate and sending the displayed image and prompt to Runway.</label>
+    <button class="button primary" id="confirmGenerationBtn" disabled type="button">Confirm & generate</button>
+    <p id="generationMessage" class="dialog-footnote" role="status"></p>
+    <button class="text-button" id="refreshJobsBtn" type="button">Load this project’s generation tasks</button><div id="generationJobs"></div>
+  </dialog>
+</body>
+</html>

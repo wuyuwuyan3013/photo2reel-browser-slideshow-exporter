@@ -1,0 +1,20 @@
+/.well-known/api-catalog
+  Content-Type: application/linkset+json
+  Access-Control-Allow-Origin: *
+
+/.well-known/oauth-authorization-server
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+
+/.well-known/oauth-protected-resource
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+
+/.well-known/ai-catalog.json
+  Access-Control-Allow-Origin: *
+
+/.well-known/agent-skills/index.json
+  Access-Control-Allow-Origin: *
+
+/.well-known/agent-skills/photo-to-video/SKILL.md
+  Access-Control-Allow-Origin: *

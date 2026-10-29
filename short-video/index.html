@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Turn photos into a vertical short video cut on the beat of your track. Renders in your browser at 1080 × 1920 — no queue, no credits, no watermark, no upload." />
+  <title>Photos to Vertical Video on the Beat — Free, No Watermark | Photo2Reel</title>
+  <style>
+    :root { --ink:#f4f8ff; --muted:#aebbd4; --panel:#14213b; --line:rgba(205,222,255,.18); --aqua:#64f2d2; --blue:#6fa8ff; --hot:#ffba67; --danger:#ff8196; }
+    * { box-sizing:border-box; }
+    html { background:#091426; scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:radial-gradient(circle at 88% 4%, #253c75 0, transparent 29rem), radial-gradient(circle at 0 38%, #12354f 0, transparent 27rem), #091426; font:16px/1.55 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    button,input,select,textarea { font:inherit; }
+    button { cursor:pointer; }
+    .shell { width:min(1180px, calc(100% - 32px)); margin:auto; }
+    header { display:flex; justify-content:space-between; align-items:center; padding:26px 0 20px; gap:18px; }
+    .brand { color:var(--ink); font-weight:800; letter-spacing:-.04em; text-decoration:none; font-size:1.18rem; }
+    .brand i { color:var(--aqua); font-style:normal; }
+    .site-nav { display:flex; flex-wrap:wrap; justify-content:center; gap:13px; margin-left:auto; }
+    .site-nav a { color:var(--muted); text-decoration:none; font-size:.86rem; font-weight:700; }
+    .site-nav a:hover,.site-nav a:focus-visible { color:var(--aqua); }
+    .privacy-chip { color:#09231d; background:var(--aqua); border-radius:999px; padding:7px 11px; font-size:.78rem; font-weight:800; white-space:nowrap; }
+    .intro { display:grid; grid-template-columns:1fr auto; gap:24px; align-items:end; padding:28px 0 28px; }
+    h1 { font-size:clamp(2.1rem, 5vw, 4.2rem); letter-spacing:-.065em; line-height:.98; margin:0; max-width:860px; }
+    .intro p { color:var(--muted); font-size:1.08rem; max-width:700px; margin:18px 0 0; }
+    .local-note { max-width:205px; border-left:2px solid var(--hot); padding-left:12px; color:#ffe0bb; font-size:.87rem; }
+    .studio { background:rgba(14,29,53,.86); border:1px solid var(--line); border-radius:28px; box-shadow:0 24px 80px rgba(0,0,0,.28); overflow:hidden; }
+    .steps { display:grid; grid-template-columns:repeat(3,1fr); border-bottom:1px solid var(--line); }
+    .step { padding:14px 20px; color:var(--muted); font-size:.84rem; border-right:1px solid var(--line); }
+    .step:last-child { border:none; }.step b { color:var(--aqua); margin-right:6px; }
+    .workspace { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr); }
+    .controls { padding:26px; border-right:1px solid var(--line); }
+    .preview { padding:26px; background:linear-gradient(145deg,rgba(40,72,126,.35),transparent); }
+    h2 { font-size:1.2rem; letter-spacing:-.03em; margin:0 0 10px; }
+    h3 { font-size:.98rem; margin:22px 0 9px; }
+    .sub { color:var(--muted); font-size:.9rem; margin:0 0 16px; }
+    .drop { display:grid; place-items:center; min-height:132px; padding:18px; border:1.5px dashed rgba(100,242,210,.6); background:rgba(100,242,210,.06); border-radius:18px; text-align:center; transition:.2s; }
+    .drop.drag { transform:scale(1.01); border-color:var(--aqua); background:rgba(100,242,210,.13); }
+    .drop strong { display:block; font-size:1rem; }.drop small { color:var(--muted); display:block; margin:4px 0 12px; }
+    .button, .tiny-button { display:inline-flex; align-items:center; justify-content:center; border:0; border-radius:12px; font-weight:800; transition:transform .15s,filter .15s; }
+    .button:hover,.tiny-button:hover { filter:brightness(1.1); transform:translateY(-1px); }
+    .button { padding:12px 16px; background:var(--aqua); color:#05211b; }
+    .button.alt { background:rgba(255,255,255,.1); color:var(--ink); border:1px solid var(--line); }
+    .button:disabled { cursor:not-allowed; filter:grayscale(.9); opacity:.5; transform:none; }
+    .photo-list { display:grid; gap:8px; margin-top:14px; }
+    .photo-empty { color:var(--muted); text-align:center; padding:14px; font-size:.88rem; }
+    .photo { display:grid; grid-template-columns:44px 1fr 30px; gap:10px; align-items:center; padding:7px; background:rgba(255,255,255,.055); border:1px solid transparent; border-radius:12px; }
+    .photo:hover { border-color:var(--line); }
+    .photo img { width:44px; height:44px; object-fit:cover; border-radius:8px; }
+    .photo-name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:.84rem; }
+    .remove { color:var(--danger); background:transparent; border:0; font-size:1.25rem; }
+    textarea { width:100%; min-height:104px; resize:vertical; color:var(--ink); background:#0c1830; border:1px solid var(--line); border-radius:12px; padding:11px; line-height:1.45; }
+    .row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .field { display:grid; gap:6px; }
+    .field label { font-size:.76rem; color:var(--muted); }
+    .field select, .field input[type=number] { width:100%; color:var(--ink); background:#0c1830; border:1px solid var(--line); border-radius:10px; padding:9px; }
+    .field input[type=range] { width:100%; }
+    .upload-audio { margin-top:9px; padding:9px; border:1px dashed var(--line); border-radius:10px; font-size:.82rem; color:var(--muted); }
+    .upload-audio input { width:100%; margin-top:5px; }
+    .render-bar { display:flex; gap:10px; align-items:center; margin-top:22px; flex-wrap:wrap; }
+    .status { color:var(--muted); font-size:.8rem; }
+    .status.error { color:#ff9cab; } .status.ok { color:var(--aqua); }
+    .canvas-wrap { position:relative; overflow:hidden; border-radius:20px; background:#050b17; border:1px solid var(--line); aspect-ratio:9/16; max-width:min(100%, 320px); margin-inline:auto; }
+    .canvas-wrap canvas { display:block; width:100%; height:100%; }
+    .preview-badge { position:absolute; top:9px; left:9px; padding:3px 7px; border-radius:6px; background:rgba(3,10,25,.72); font-size:.66rem; color:var(--muted); }
+    .project-details { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin:13px 0 18px; }
+    .metric { padding:10px; background:rgba(255,255,255,.055); border-radius:11px; }
+    .metric span { display:block; font-size:.71rem; color:var(--muted); }
+    .metric b { font-size:.98rem; }
+    .download { display:none; width:100%; text-decoration:none; margin-top:12px; }
+    .download.show { display:flex; }
+    .privacy { display:grid; grid-template-columns:auto 1fr; gap:12px; border-top:1px solid var(--line); margin-top:22px; padding-top:18px; }
+    .privacy p { color:var(--muted); margin:3px 0 0; font-size:.83rem; }
+    .article { padding:64px 0 72px; max-width:850px; }
+    .article h2 { font-size:clamp(1.6rem,3vw,2.4rem); margin-bottom:16px; }
+    .article h3 { font-size:1.15rem; margin-top:28px; }
+    .article p { color:#c7d2e7; } .article strong { color:var(--ink); }
+    .benefits { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:24px 0 30px; }
+    .benefit { background:rgba(255,255,255,.055); padding:12px; border-radius:12px; border:1px solid var(--line); font-size:.82rem; }
+    .benefit b { color:var(--aqua); display:block; font-size:.9rem; }
+    footer { color:var(--muted); border-top:1px solid var(--line); padding:22px 0 34px; font-size:.8rem; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    footer .site-nav { margin-left:0; justify-content:flex-end; }
+    @media (max-width:780px) {
+      .shell{width:min(100% - 24px, 620px)} header{padding-top:17px;align-items:flex-start}.site-nav{order:3;width:100%;justify-content:flex-start;gap:11px}
+      .intro{display:block;padding:20px 0}.local-note{margin-top:16px;max-width:none}.steps{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line);padding:10px 16px}.step:last-child{border-bottom:0}
+      .workspace{grid-template-columns:1fr}.controls{border-right:0;border-bottom:1px solid var(--line);padding:20px}.preview{padding:20px}
+      .article{padding:44px 0}.benefits{grid-template-columns:1fr 1fr}.button{width:100%}footer{display:block}footer .site-nav{margin-top:12px;justify-content:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <a class="brand" href="/">Photo<i>2Reel</i></a>
+      <nav class="site-nav" aria-label="Site navigation"><a href="/">Tool</a><a href="/short-video/">Short video</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/contact">Contact</a></nav>
+      <span class="privacy-chip">LOCAL • PRIVATE • FREE</span>
+    </header>
+
+    <section class="intro">
+      <div>
+        <h1>Photos into a vertical video — cut on the beat, made in your browser.</h1>
+        <p>Drop a few photos, add the track you want, and the cuts land on the beat instead of on a stopwatch. Export a 1080 × 1920 MP4. Nothing is uploaded, nothing is watermarked, and there is no credit counter to run out.</p>
+      </div>
+      <div class="local-note">No queue. No credits. No watermark. Your photos never leave this device.</div>
+    </section>
+
+    <section class="studio" id="tool" aria-label="Short video maker">
+      <div class="steps"><div class="step"><b>01</b>Add a photo and text</div><div class="step"><b>02</b>Pick a template</div><div class="step"><b>03</b>Create & download</div></div>
+      <div class="workspace">
+        <div class="controls">
+          <h2>Your shot</h2>
+          <p class="sub">One image is enough. Add more and they rotate behind the text.</p>
+          <div class="drop" id="dropZone">
+            <div>
+              <strong>Drop photos here</strong>
+              <small>JPG, PNG, WebP, HEIC where your browser supports it</small>
+              <label class="button" for="imageInput">Choose photos</label>
+              <input id="imageInput" type="file" accept="image/*" multiple hidden>
+            </div>
+          </div>
+          <div class="photo-list" id="photoList"><div class="photo-empty">Your selected photos will appear here.</div></div>
+
+          <h3>Text on screen</h3>
+          <textarea id="scriptInput" placeholder="Paste the line you want on screen. Each sentence becomes its own caption.&#10;&#10;Photos look flat until something moves.&#10;One photo is enough to start."></textarea>
+          <p class="sub" style="margin:8px 0 0">Split on . ! ? or a new line. One sentence per caption.</p>
+
+          <h3>Recipe</h3>
+          <div class="field"><label for="recipeSelect">What are you making?</label>
+            <select id="recipeSelect">
+              <option value="story" selected>Story — four beats a photo, slow</option>
+              <option value="photodump">Photo dump — one cut per beat, fast</option>
+              <option value="beforeafter">Before &amp; after — four beats a photo, bold</option>
+              <option value="product">Product drop — two beats a photo, punchy</option>
+              <option value="custom">Custom — I will set the look and the pace</option>
+            </select>
+          </div>
+          <p class="sub" style="margin:8px 0 0">A recipe only sets the look and the pace. Change either one afterwards and it switches to Custom.</p>
+
+          <div class="row" style="margin-top:20px">
+            <div class="field"><label for="templateSelect">Look</label>
+              <select id="templateSelect">
+                <option value="clean">Clean — white caption, slow push in</option>
+                <option value="bold">Bold — big centred words, hard push</option>
+                <option value="caption">Caption — bar at the bottom, pan</option>
+                <option value="cinema">Cinematic — warm lower third, slow pull out</option>
+                <option value="punch">Punch — aqua words on top, fast push</option>
+              </select>
+            </div>
+            <div class="field"><label for="secondsShot">Seconds per photo</label>
+              <input id="secondsShot" type="number" min="1.5" max="10" step="0.5" value="3.5">
+            </div>
+          </div>
+
+          <h3>Music</h3>
+          <div class="row">
+            <div class="field"><label for="musicType">Soundtrack</label>
+              <select id="musicType"><option value="none">No music</option><option value="ambient">Soft ambient tone</option><option value="pulse">Warm pulse</option><option value="upload">Upload my audio</option></select>
+            </div>
+            <div class="field"><label for="volume">Music volume</label><input id="volume" type="range" min="0" max="100" value="55"><output id="volumeValue">55%</output></div>
+          </div>
+          <div class="upload-audio" id="audioUpload" hidden>
+            <label for="audioInput">Choose an MP3, M4A, WAV, or other browser-playable audio file.</label>
+            <input id="audioInput" type="file" accept="audio/*">
+          </div>
+
+          <div id="beatBox" hidden style="margin-top:16px;padding:14px 16px;border:1px solid rgba(120,170,255,.24);border-radius:14px;background:rgba(18,32,60,.55)">
+            <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap">
+              <b style="font-size:14px;letter-spacing:.02em">Beat sync</b>
+              <span id="beatInfo" style="font-size:12.5px;color:#93aacd">Waiting for audio…</span>
+            </div>
+            <div class="row" style="margin-top:12px">
+              <div class="field"><label for="rhythmMode">Cut rhythm</label>
+                <select id="rhythmMode">
+                  <option value="beat">Auto — cut on the beat</option>
+                  <option value="fixed">Fixed — use seconds per photo</option>
+                </select>
+              </div>
+              <div class="field"><label for="beatsPerPhoto">Beats per photo</label>
+                <select id="beatsPerPhoto">
+                  <option value="1">1 beat — fastest</option>
+                  <option value="2">2 beats</option>
+                  <option value="4" selected>4 beats — one bar</option>
+                  <option value="8">8 beats — two bars</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="render-bar">
+            <button class="button" id="renderBtn" disabled>Create video</button>
+            <span class="status" id="status" role="status">Add a photo to begin.</span>
+          </div>
+        </div>
+
+        <div class="preview">
+          <h2>Preview</h2>
+          <p class="sub" id="resolutionNote">Rendered locally at 1080 × 1920 (9:16).</p>
+          <div class="canvas-wrap"><canvas id="canvas" width="1080" height="1920"></canvas><span class="preview-badge">LOCAL PREVIEW</span></div>
+          <div class="project-details">
+            <div class="metric"><span>Photos</span><b id="photoCount">0</b></div>
+            <div class="metric"><span>Video length</span><b id="totalLength">0 sec</b></div>
+          </div>
+          <a class="button alt download" id="downloadLink" download>Download video</a>
+          <button class="button alt" id="stillBtn" type="button" style="margin-top:10px">Download cover frame (PNG)</button>
+          <div class="privacy"><div>⌁</div><div><b>Private by design</b><p>Images, audio, and the finished video stay in this browser session. There is no upload endpoint and no account system.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <article class="article">
+      <h2>One photo, one line, one vertical video</h2>
+      <p><strong>This tool turns a single photograph and a sentence into a vertical short video without sending anything to a server.</strong> You choose the image, type the words you want on screen, pick a template, and the browser renders a 1080 × 1920 MP4 with slow camera movement behind the text. It is built for the kind of clip that needs one idea, one frame, and a caption — not a full timeline.</p>
+      <div class="benefits">
+        <div class="benefit"><b>No queue</b>It renders on your device, so it starts the moment you click.</div>
+        <div class="benefit"><b>No credits</b>No counter, no per-second billing, nothing to top up.</div>
+        <div class="benefit"><b>No watermark</b>Your finished frame stays clean.</div>
+        <div class="benefit"><b>No length cap</b>Length comes from your photo count, not from a five-second model limit.</div>
+        <div class="benefit"><b>No failed renders</b>Nothing to fail and nothing to refund.</div>
+        <div class="benefit"><b>No upload</b>Photos and audio never leave this device.</div>
+      </div>
+      <h3>How the cuts land on the beat</h3>
+      <p>Add a track and the page reads it on your device, finds the onsets, and works out a tempo. It then places the cuts on that grid rather than on a fixed timer, so the first photo changes on a beat instead of half a beat late. The control that matters is <strong>beats per photo</strong>: four beats keeps each photo on one bar, two beats doubles the pace, one beat is the fastest cut that still reads on a phone.</p>
+      <p>There is a short punch on every cut — a 55 millisecond push and a light flash — which is what makes a slideshow feel like it is hitting the music rather than drifting over it. If the track has no clear beat, or you would rather set the pace yourself, switch the rhythm to fixed and the seconds-per-photo field takes over again.</p>
+      <h3>How the text and the photo are timed</h3>
+      <p>The tool splits your text on full stops, question marks, exclamation marks, and line breaks. Every resulting sentence becomes one caption with a fade, a rise, or a pop, depending on the template. The captions are spread evenly across the whole video, so a short line on a long clip holds longer and a long line on a short clip moves faster. If your text needs more room than the photos allow, the video gets longer instead of the captions getting faster.</p>
+      <p>Each photo is held for the number of seconds you set, and the frame is filled edge to edge rather than letterboxed. A 9:16 crop of a landscape photo loses the sides, so put the subject near the middle before you render. Adding a second or third photo makes the background rotate behind the same text instead of holding one frame for the whole clip.</p>
+      <h3>What the templates actually change</h3>
+      <p>A template is three decisions bundled together: where the words sit, how they arrive, and how the camera moves. Clean puts white text in the lower third with a slow push in. Bold centres the words and pushes harder, which suits a single blunt statement. Caption draws a dark bar along the bottom so the words stay readable over a busy image. Cinematic pulls out slowly and keeps the text warm and low. Punch places aqua words at the top with a fast push, which reads well on a phone feed where the bottom is covered by interface.</p>
+      <h3>Recipes are a starting point, not a lock</h3>
+      <p>A recipe bundles a look with a pace. Photo dump cuts on every beat and keeps a dark bar under the words, which is the format that fills a feed with quick frames. Before and after holds each photo for four beats and centres the words, so a comparison reads without being rushed. Story is the slowest option and suits a handful of photos that each need a moment. Product drop cuts every two beats with aqua words at the top, where a feed's interface does not cover them.</p>
+      <p>Picking a recipe sets the look and the beats per photo, and that is all it does. Change either one afterwards and the recipe switches itself to Custom, because the useful part is knowing what you changed, not being stuck inside a preset.</p>
+      <p>There is also a cover frame button. A vertical clip needs a still for the thumbnail, and the frame you exported is already cropped to 9:16, so it drops straight into the platform's cover picker instead of being recropped by hand.</p>
+      <h2>Why there is no queue, no credit counter, and no watermark</h2>
+      <p>Every tool that generates footage from a model in the cloud has the same three costs underneath the feature list. Your job sits in a shared queue behind everyone else's, so a busy hour becomes a wait. Every attempt is billed whether or not the output is usable. And the free tier usually pays for itself with a watermark, a 720p ceiling, and a five to eight second cap.</p>
+      <p>None of those three exist here, and it is not a pricing decision. There is no model to queue for, because the page is not generating new imagery — it is arranging the photographs you already took. The work happens on your own graphics chip while you watch, which is why it starts instantly, why a bad take costs nothing, and why the length is limited by how many photos you added rather than by a vendor's clip length.</p>
+      <p>The honest trade is the other direction: what you get is timing, framing, and music sync, not invented footage. If you need the picture itself to move — a face turning, a product rotating — that requires a video model running outside the browser, and it brings the queue, the credits, and the watermark back with it.</p>
+      <h3>What this tool does not do yet</h3>
+      <p>The text is drawn on top of your photo — it does not generate new imagery. Turning a written prompt into generated footage requires a text-to-video model running outside the browser, which means an API key, a per-second cost, and a server to hold the key. That is a separate product decision, not a checkbox. Everything on this page happens on your device, which is why it can stay free and stay private.</p>
+    </article>
+
+    <footer>
+      <span>© 2026 Photo2Reel by an independent developer.</span>
+      <nav class="site-nav" aria-label="Footer navigation"><a href="/">Tool</a><a href="/short-video/">Short video</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/contact">Contact</a></nav>
+    </footer>
+  </main>
+
+  <script type="module">
+    (() => {
+      const $ = s => document.querySelector(s);
+      const imageInput = $('#imageInput'), audioInput = $('#audioInput'), dropZone = $('#dropZone'), photoList = $('#photoList');
+      const scriptInput = $('#scriptInput'), templateSelect = $('#templateSelect'), secondsShot = $('#secondsShot');
+      const musicType = $('#musicType'), audioUpload = $('#audioUpload'), volume = $('#volume'), volumeValue = $('#volumeValue');
+      const canvas = $('#canvas'), ctx = canvas.getContext('2d');
+      const renderBtn = $('#renderBtn'), status = $('#status'), downloadLink = $('#downloadLink');
+      const photoCount = $('#photoCount'), totalLength = $('#totalLength');
+      const rhythmMode = $('#rhythmMode'), beatsPerPhoto = $('#beatsPerPhoto'), beatBox = $('#beatBox'), beatInfo = $('#beatInfo');
+      const recipeSelect = $('#recipeSelect'), stillBtn = $('#stillBtn');
+
+      const RECIPES = {
+        story:       { look: 'clean',   beats: 4, seconds: 3.5 },
+        photodump:   { look: 'caption', beats: 1, seconds: 1.5 },
+        beforeafter: { look: 'bold',    beats: 4, seconds: 2.0 },
+        product:     { look: 'punch',   beats: 2, seconds: 2.0 }
+      };
+
+      const W = 1080, H = 1920;
+      let photos = [], audioFile = null, resultUrl = null, busy = false, ffmpeg = null;
+      let beats = [], audioDuration = 0, beatBpm = 0;
+
+      const TEMPLATES = {
+        clean:   { color:'#ffffff', stroke:'rgba(0,0,0,.55)', weight:800, size:.074, pos:'bottom', motion:'in',  anim:'fade', scrim:.62, line:1.24, max:.84 },
+        bold:    { color:'#ffffff', stroke:'rgba(0,0,0,.75)', weight:900, size:.098, pos:'center', motion:'in',  anim:'pop',  scrim:.34, line:1.12, max:.86 },
+        caption: { color:'#ffffff', stroke:'rgba(0,0,0,.85)', weight:700, size:.058, pos:'bottom', motion:'pan', anim:'fade', scrim:.80, line:1.30, max:.86, bar:true },
+        cinema:  { color:'#f6efe3', stroke:'rgba(0,0,0,.62)', weight:600, size:.064, pos:'lower',  motion:'out', anim:'rise', scrim:.52, line:1.32, max:.80 },
+        punch:   { color:'#64f2d2', stroke:'rgba(0,12,10,.85)', weight:900, size:.090, pos:'top',   motion:'in',  anim:'pop',  scrim:.30, line:1.14, max:.84 }
+      };
+
+      const setStatus = (t, k='') => { status.textContent = t; status.className = `status ${k}`; };
+      const fmt = n => `${Math.round(n * 10) / 10} sec`;
+
+      function chunks() {
+        return (scriptInput.value || '')
+          .split(/[.!?。！？\n]+/)
+          .map(s => s.trim().replace(/\s+/g, ' '))
+          .filter(Boolean);
+      }
+
+      function perShot() {
+        const v = Number(secondsShot.value);
+        return Math.max(1.5, Math.min(10, isFinite(v) ? v : 3.5));
+      }
+
+      function getTotal() {
+        if (beatMode()) {
+          const cp = cutPoints();
+          if (cp.length) {
+            let end = cp[cp.length - 1] + avgBeat() * Math.max(1, Number(beatsPerPhoto.value) || 4);
+            if (audioDuration) end = Math.min(end, audioDuration);
+            return Math.max(1.5, end);
+          }
+        }
+        const c = chunks().length;
+        const base = Math.max(photos.length, 1) * perShot();
+        const forText = c * 2.2;
+        return Math.max(base, forText, 2);
+      }
+
+      /* ---------- beat grid ---------- */
+
+      function beatMode() {
+        return rhythmMode.value === 'beat' && beats.length >= 2 && musicType.value === 'upload';
+      }
+
+      function avgBeat() {
+        if (beats.length >= 2) {
+          const span = beats[beats.length - 1] - beats[0];
+          const avg = span / (beats.length - 1);
+          if (avg > 0.15 && avg < 3) return avg;
+        }
+        return beatBpm ? 60 / beatBpm : 0.5;
+      }
+
+      function cutPoints() {
+        if (!beatMode() || !photos.length) return [];
+        const n = photos.length;
+        const step = Math.max(1, Number(beatsPerPhoto.value) || 4);
+        const avg = avgBeat();
+        const out = [0];
+        for (let k = 1; k < n; k++) {
+          const idx = k * step;
+          let t = idx < beats.length ? beats[idx] : out[k - 1] + avg * step;
+          if (audioDuration) t = Math.min(t, Math.max(0.2, audioDuration - 0.05));
+          out.push(t);
+        }
+        return out;
+      }
+
+      function segmentsFor(total) {
+        const cp = cutPoints();
+        if (cp.length >= 2) {
+          return cp.map((s, i) => ({ start: s, end: i + 1 < cp.length ? cp[i + 1] : total }));
+        }
+        const per = total / Math.max(1, photos.length);
+        return photos.map((_, i) => ({ start: i * per, end: (i + 1) * per }));
+      }
+
+      /* ---------- drawing ---------- */
+
+      function drawPhoto(photo, p, motion, extra = 1) {
+        const img = photo.image;
+        const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height;
+        const cover = Math.max(W / iw, H / ih);
+        let z = 1, dx = 0, dy = 0;
+        if (motion === 'in') z = 1 + 0.16 * p;
+        else if (motion === 'out') z = 1.16 - 0.16 * p;
+        else if (motion === 'pan') { z = 1.12; dx = (p - 0.5) * 0.05 * W; }
+        const s = cover * z * extra, w = iw * s, h = ih * s;
+        ctx.fillStyle = '#060c19';
+        ctx.fillRect(0, 0, W, H);
+        ctx.drawImage(img, (W - w) / 2 + dx, (H - h) / 2 + dy, w, h);
+      }
+
+      function drawPlaceholder() {
+        ctx.fillStyle = '#071226';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#4d6a9c';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = `700 44px system-ui, -apple-system, "Segoe UI", sans-serif`;
+        ctx.fillText('Your short video preview', W / 2, H / 2 - 30);
+        ctx.font = `400 30px system-ui, -apple-system, "Segoe UI", sans-serif`;
+        ctx.fillText('Add a photo, then write a line', W / 2, H / 2 + 34);
+      }
+
+      function wrapText(text, maxWidth, font) {
+        ctx.font = font;
+        const out = [];
+        let line = '';
+        const tokens = text.includes(' ') ? text.split(/\s+/) : [...text];
+        const sep = text.includes(' ') ? ' ' : '';
+        for (const tk of tokens) {
+          const trial = line ? line + sep + tk : tk;
+          if (ctx.measureText(trial).width > maxWidth && line) { out.push(line); line = tk; }
+          else if (!line && ctx.measureText(trial).width > maxWidth) {
+            // single token wider than the frame: break by characters
+            let buf = '';
+            for (const ch of trial) {
+              if (ctx.measureText(buf + ch).width > maxWidth && buf) { out.push(buf); buf = ch; }
+              else buf += ch;
+            }
+            line = buf;
+          } else line = trial;
+        }
+        if (line) out.push(line);
+        return out;
+      }
+
+      function drawCaption(t, total) {
+        const list = chunks();
+        if (!list.length) return;
+        const tpl = TEMPLATES[templateSelect.value] || TEMPLATES.clean;
+        const per = total / list.length;
+        const idx = Math.min(list.length - 1, Math.floor(t / per));
+        const local = (t - idx * per) / per;
+        const text = list[idx];
+
+        // scrim
+        const scrimTop = tpl.pos === 'top' ? 0 : tpl.pos === 'center' ? H * .30 : H * .52;
+        const scrimH = tpl.pos === 'center' ? H * .40 : H * .48;
+        const grad = ctx.createLinearGradient(0, scrimTop, 0, scrimTop + scrimH);
+        if (tpl.pos === 'top') { grad.addColorStop(0, `rgba(0,0,0,${tpl.scrim})`); grad.addColorStop(1, 'rgba(0,0,0,0)'); }
+        else { grad.addColorStop(0, 'rgba(0,0,0,0)'); grad.addColorStop(1, `rgba(0,0,0,${tpl.scrim})`); }
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, scrimTop, W, scrimH);
+
+        if (tpl.bar) {
+          ctx.fillStyle = 'rgba(3,8,18,.62)';
+          ctx.fillRect(0, H * .70, W, H * .20);
+        }
+
+        // timing envelope
+        const inDur = 0.34, outDur = 0.26;
+        const tIn = idx * per;
+        const tOut = (idx + 1) * per;
+        let alpha = 1, shift = 0, scale = 1;
+        if (t < tIn + inDur) {
+          const k = Math.max(0, (t - tIn) / inDur);
+          alpha = k;
+          if (tpl.anim === 'rise') shift = (1 - k) * 46;
+          if (tpl.anim === 'pop') scale = 0.92 + 0.08 * k;
+        } else if (t > tOut - outDur) {
+          alpha = Math.max(0, (tOut - t) / outDur);
+        }
+        if (alpha <= 0.001) return;
+
+        const size = Math.round(W * tpl.size);
+        const font = `${tpl.weight} ${size}px system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif`;
+        const lines = wrapText(text, W * tpl.max, font);
+        const lh = size * tpl.line;
+        const blockH = lines.length * lh;
+
+        let baseY;
+        if (tpl.pos === 'top') baseY = H * 0.16;
+        else if (tpl.pos === 'center') baseY = H * 0.5 - blockH / 2 + lh * 0.72;
+        else if (tpl.pos === 'lower') baseY = H * 0.74 - blockH + lh * 0.72;
+        else baseY = H * 0.82 - blockH + lh * 0.72;
+
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.translate(W / 2, baseY + shift);
+        ctx.scale(scale, scale);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'alphabetic';
+        ctx.font = font;
+        ctx.lineJoin = 'round';
+        ctx.miterLimit = 2;
+        ctx.strokeStyle = tpl.stroke;
+        ctx.lineWidth = Math.max(6, size * 0.14);
+        lines.forEach((ln, i) => {
+          const y = i * lh;
+          ctx.strokeText(ln, 0, y);
+          ctx.fillStyle = tpl.color;
+          ctx.fillText(ln, 0, y);
+        });
+        ctx.restore();
+      }
+
+      function drawAt(t) {
+        const total = getTotal();
+        const tt = Math.max(0, Math.min(total, t));
+        if (!photos.length) { drawPlaceholder(); return; }
+        const segs = segmentsFor(total);
+        let idx = segs.length - 1;
+        for (let i = 0; i < segs.length; i++) { if (tt < segs[i].end) { idx = i; break; } }
+        const seg = segs[idx];
+        const local = Math.min(1, Math.max(0, (tt - seg.start) / Math.max(0.001, seg.end - seg.start)));
+        const tpl = TEMPLATES[templateSelect.value] || TEMPLATES.clean;
+        const sinceCut = tt - seg.start;
+        const punch = beatMode() ? Math.max(0, Math.min(1, 1 - sinceCut / 0.22)) : 0;
+        drawPhoto(photos[idx % photos.length], local, tpl.motion, 1 + 0.055 * punch);
+        if (punch > 0.62) {
+          ctx.fillStyle = `rgba(255,255,255,${((punch - 0.62) / 0.38) * 0.16})`;
+          ctx.fillRect(0, 0, W, H);
+        }
+        drawCaption(tt, total);
+      }
+
+      /* ---------- UI ---------- */
+
+      function refresh() {
+        photoCount.textContent = photos.length;
+        totalLength.textContent = fmt(getTotal());
+        renderBtn.disabled = photos.length < 1 || busy;
+        photoList.innerHTML = photos.length ? '' : '<div class="photo-empty">Your selected photos will appear here.</div>';
+        photos.forEach((photo, index) => {
+          const row = document.createElement('div');
+          row.className = 'photo';
+          row.innerHTML = `<img src="${photo.url}" alt="Selected photo ${index + 1}"><span class="photo-name" title="${photo.file.name}">${index + 1}. ${photo.file.name}</span><button class="remove" title="Remove photo" aria-label="Remove ${photo.file.name}">×</button>`;
+          row.querySelector('.remove').addEventListener('click', () => {
+            URL.revokeObjectURL(photo.url);
+            photos.splice(index, 1);
+            refresh(); drawAt(0);
+          });
+          photoList.append(row);
+        });
+        drawAt(0);
+      }
+
+      async function addFiles(files) {
+        const valid = [...files].filter(f => f.type.startsWith('image/'));
+        if (!valid.length) { setStatus('Choose image files such as JPG, PNG, or WebP.', 'error'); return; }
+        for (const file of valid) {
+          const url = URL.createObjectURL(file);
+          const image = new Image();
+          image.src = url;
+          try { await image.decode(); photos.push({ file, url, image }); }
+          catch { URL.revokeObjectURL(url); }
+        }
+        setStatus(`${valid.length} photo${valid.length === 1 ? '' : 's'} added.`, 'ok');
+        refresh();
+      }
+
+      imageInput.addEventListener('change', e => addFiles(e.target.files));
+      ['dragenter', 'dragover'].forEach(t => dropZone.addEventListener(t, e => { e.preventDefault(); dropZone.classList.add('drag'); }));
+      ['dragleave', 'drop'].forEach(t => dropZone.addEventListener(t, e => { e.preventDefault(); dropZone.classList.remove('drag'); }));
+      dropZone.addEventListener('drop', e => addFiles(e.dataTransfer.files));
+      musicType.addEventListener('change', () => {
+        audioUpload.hidden = musicType.value !== 'upload';
+        if (musicType.value !== 'upload') {
+          audioFile = null;
+          beats = []; audioDuration = 0; beatBpm = 0;
+          beatBox.hidden = true;
+        }
+        refresh();
+      });
+      audioInput.addEventListener('change', e => {
+        audioFile = e.target.files[0] || null;
+        if (audioFile) { setStatus(`Audio ready: ${audioFile.name}`, 'ok'); detectBeats(audioFile); }
+      });
+      rhythmMode.addEventListener('change', refresh);
+      beatsPerPhoto.addEventListener('change', () => { markCustom(); refresh(); });
+      recipeSelect.addEventListener('change', () => {
+        const r = RECIPES[recipeSelect.value];
+        if (!r) return;
+        templateSelect.value = r.look;
+        beatsPerPhoto.value = String(r.beats);
+        secondsShot.value = String(r.seconds);
+        refresh();
+      });
+
+      function markCustom() {
+        if (recipeSelect.value !== 'custom') recipeSelect.value = 'custom';
+      }
+
+      stillBtn.addEventListener('click', () => {
+        if (!photos.length) { setStatus('Add a photo first.', 'error'); return; }
+        drawAt(0.05);
+        canvas.toBlob(blob => {
+          if (!blob) return;
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url; a.download = 'photo2reel-cover.png';
+          document.body.append(a); a.click(); a.remove();
+          setTimeout(() => URL.revokeObjectURL(url), 4000);
+          setStatus('Cover frame saved as a PNG.', 'ok');
+        }, 'image/png');
+      });
+      volume.addEventListener('input', () => volumeValue.textContent = `${volume.value}%`);
+      scriptInput.addEventListener('input', refresh);
+      secondsShot.addEventListener('change', refresh);
+      templateSelect.addEventListener('change', () => { markCustom(); drawAt(0); });
+
+      /* ---------- beat detection ---------- */
+
+      async function detectBeats(file) {
+        beatBox.hidden = false;
+        beatInfo.textContent = 'Analysing the audio…';
+        try {
+          const buf = await file.arrayBuffer();
+          const ac = new (window.AudioContext || window.webkitAudioContext)();
+          const audio = await ac.decodeAudioData(buf.slice(0));
+          audioDuration = audio.duration;
+          const data = audio.getChannelData(0);
+          const sr = audio.sampleRate;
+          const hop = Math.max(1, Math.floor(sr * 0.02));
+          const frames = Math.floor(data.length / hop);
+          const energy = new Float32Array(frames);
+          for (let i = 0; i < frames; i++) {
+            let s = 0; const st = i * hop;
+            for (let j = 0; j < hop; j++) { const v = data[st + j] || 0; s += v * v; }
+            energy[i] = Math.sqrt(s / hop);
+          }
+          const flux = new Float32Array(frames);
+          for (let i = 1; i < frames; i++) {
+            flux[i] = Math.max(0, Math.log(1 + energy[i] * 8) - Math.log(1 + energy[i - 1] * 8));
+          }
+          const win = Math.round(0.8 / 0.02), minGap = Math.round(0.2 / 0.02);
+          const peaks = [];
+          for (let i = 1; i < frames - 1; i++) {
+            const lo = Math.max(0, i - win), hi = Math.min(frames - 1, i + win);
+            let sum = 0, n = 0;
+            for (let j = lo; j <= hi; j++) { sum += flux[j]; n++; }
+            if (flux[i] > (sum / n) * 1.55 && flux[i] > 0.006 && flux[i] >= flux[i - 1] && flux[i] >= flux[i + 1]) {
+              if (!peaks.length || i - peaks[peaks.length - 1] >= minGap) peaks.push(i);
+              else if (flux[i] > flux[peaks[peaks.length - 1]]) peaks[peaks.length - 1] = i;
+            }
+          }
+          beats = peaks.map(i => i * 0.02);
+          await ac.close();
+
+          const gaps = [];
+          for (let i = 1; i < beats.length; i++) {
+            const g = beats[i] - beats[i - 1];
+            if (g > 0.2 && g < 1.6) gaps.push(g);
+          }
+          gaps.sort((a, b) => a - b);
+          const med = gaps.length ? gaps[Math.floor(gaps.length / 2)] : 0;
+          let bpm = med ? 60 / med : 0;
+          while (bpm && bpm < 70) bpm *= 2;
+          while (bpm > 170) bpm /= 2;
+          beatBpm = Math.round(bpm) || 0;
+
+          beatInfo.textContent = beats.length
+            ? `${beatBpm || '—'} BPM · ${beats.length} cuts found · ${Math.round(audioDuration)}s of audio`
+            : 'No clear beat found — fixed seconds will be used.';
+          rhythmMode.value = beats.length >= 4 ? 'beat' : 'fixed';
+          refresh();
+        } catch (err) {
+          beats = []; audioDuration = 0; beatBpm = 0;
+          beatInfo.textContent = 'Could not read this audio file — fixed seconds will be used.';
+          rhythmMode.value = 'fixed';
+          refresh();
+        }
+      }
+
+      /* ---------- rendering ---------- */
+
+      function recordingMime() {
+        if (!window.MediaRecorder) return '';
+        return [
+          'video/mp4;codecs=avc1.42E01E,mp4a.40.2',
+          'video/mp4',
+          'video/webm;codecs=vp9,opus',
+          'video/webm;codecs=vp8,opus',
+          'video/webm'
+        ].find(x => MediaRecorder.isTypeSupported(x)) || '';
+      }
+
+      async function mp4Converter() {
+        if (ffmpeg) return ffmpeg;
+        const [{ FFmpeg }, { toBlobURL }] = await Promise.all([
+          import('https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/esm/index.js'),
+          import('https://cdn.jsdelivr.net/npm/@ffmpeg/util@0.12.1/dist/esm/index.js')
+        ]);
+        ffmpeg = new FFmpeg();
+        await ffmpeg.load({
+          classWorkerURL: new URL('../vendor/ffmpeg-worker.js', import.meta.url).href,
+          coreURL: await toBlobURL('https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/esm/ffmpeg-core.js', 'text/javascript'),
+          wasmURL: await toBlobURL('https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/esm/ffmpeg-core.wasm', 'application/wasm')
+        });
+        return ffmpeg;
+      }
+
+      async function transcodeToMp4(blob) {
+        const c = await mp4Converter();
+        await c.writeFile('short-video.webm', new Uint8Array(await blob.arrayBuffer()));
+        await c.exec(['-i', 'short-video.webm', '-map', '0:v:0', '-map', '0:a?', '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-movflags', '+faststart', 'short-video.mp4']);
+        const out = await c.readFile('short-video.mp4');
+        await Promise.allSettled([c.deleteFile('short-video.webm'), c.deleteFile('short-video.mp4')]);
+        return new Blob([out], { type: 'video/mp4' });
+      }
+
+      function makeTone(ac, dest, type, gainValue, totalMs) {
+        const gain = ac.createGain();
+        gain.gain.value = gainValue;
+        gain.connect(dest);
+        const start = ac.currentTime + .05;
+        const freqs = type === 'pulse' ? [220, 293.66, 329.63, 293.66] : [174.61, 220, 261.63, 196];
+        for (let i = 0; i < Math.ceil(totalMs / 900) + 1; i++) {
+          const osc = ac.createOscillator(), env = ac.createGain(), when = start + i * .9;
+          osc.type = type === 'pulse' ? 'sine' : 'triangle';
+          osc.frequency.value = freqs[i % freqs.length];
+          env.gain.setValueAtTime(.0001, when);
+          env.gain.exponentialRampToValueAtTime(type === 'pulse' ? .13 : .045, when + .08);
+          env.gain.exponentialRampToValueAtTime(.0001, when + .84);
+          osc.connect(env).connect(gain);
+          osc.start(when); osc.stop(when + .9);
+        }
+      }
+
+      async function renderVideo() {
+        if (!photos.length || busy) return;
+        if (!window.MediaRecorder || !canvas.captureStream) { setStatus('This browser cannot create local video here. Try the latest Chrome, Edge, or Safari.', 'error'); return; }
+        const mime = recordingMime();
+        if (!mime) { setStatus('No local recording format is available. Try the latest Chrome or Edge.', 'error'); return; }
+        if (musicType.value === 'upload' && !audioFile) { setStatus('Choose an audio file or select another soundtrack.', 'error'); return; }
+
+        busy = true; refresh();
+        downloadLink.classList.remove('show');
+        if (resultUrl) URL.revokeObjectURL(resultUrl);
+
+        const total = getTotal();
+        let stage = 'prepare';
+        setStatus('Preparing your local video…');
+        try {
+          stage = 'capture';
+          const stream = canvas.captureStream(30);
+          const ac = new (window.AudioContext || window.webkitAudioContext)();
+          const dest = ac.createMediaStreamDestination();
+          const gain = ac.createGain();
+          gain.gain.value = Number(volume.value) / 100;
+          gain.connect(dest);
+
+          let audioEl = null;
+          if (musicType.value === 'upload') {
+            audioEl = new Audio(URL.createObjectURL(audioFile));
+            audioEl.loop = true;
+            audioEl.crossOrigin = 'anonymous';
+            ac.createMediaElementSource(audioEl).connect(gain);
+            await ac.resume();
+            await audioEl.play();
+          } else if (musicType.value !== 'none') {
+            await ac.resume();
+            makeTone(ac, dest, musicType.value, Number(volume.value) / 100, total * 1000);
+          }
+          dest.stream.getAudioTracks().forEach(t => stream.addTrack(t));
+
+          const blobs = [];
+          stage = 'record';
+          const rec = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 6_000_000 });
+          rec.ondataavailable = e => { if (e.data.size) blobs.push(e.data); };
+          const done = new Promise(r => { rec.onstop = r; });
+          rec.start(250);
+
+          const t0 = performance.now();
+          await new Promise(resolve => {
+            function tick() {
+              const t = (performance.now() - t0) / 1000;
+              if (t >= total) { drawAt(total - 0.01); resolve(); return; }
+              drawAt(t);
+              const pct = Math.min(99, Math.round((t / total) * 100));
+              setStatus(`Rendering ${pct}%…`);
+              requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+          });
+
+          rec.stop();
+          await done;
+          if (audioEl) { audioEl.pause(); URL.revokeObjectURL(audioEl.src); }
+          await ac.close();
+
+          setStatus('Finishing your video…');
+          const recorded = new Blob(blobs, { type: mime.split(';')[0] });
+          let mp4;
+          if (mime.startsWith('video/mp4')) {
+            mp4 = recorded;
+          } else {
+            setStatus('Converting your local recording to MP4…');
+            stage = 'transcode';
+            mp4 = await transcodeToMp4(recorded);
+          }
+          resultUrl = URL.createObjectURL(mp4);
+          downloadLink.href = resultUrl;
+          downloadLink.download = 'photo2reel-short.mp4';
+          downloadLink.textContent = 'Download video (MP4)';
+          downloadLink.classList.add('show');
+          setStatus(`Video ready — ${fmt(total)}, MP4.`, 'ok');
+        } catch (error) {
+          console.error(error);
+          const detail = [error && error.name, error && error.message].filter(Boolean).join(' · ');
+          setStatus(`Could not create the video (${stage}): ${detail || String(error) || 'unknown browser error'}`, 'error');
+        } finally {
+          busy = false;
+          refresh();
+        }
+      }
+
+      renderBtn.addEventListener('click', renderVideo);
+
+      // debug hook for automated checks
+      window.__p2r = {
+        drawAt, getTotal, chunks,
+        cutPoints: () => cutPoints(),
+        beats: () => beats.slice(0, 40),
+        setBeats: (list, dur, bpm) => { beats = list; audioDuration = dur || 0; beatBpm = bpm || 0; beatBox.hidden = false; refresh(); },
+        state: () => ({ photos: photos.length, total: getTotal(), chunks: chunks().length, beatMode: beatMode(), cuts: cutPoints().length, bpm: beatBpm })
+      };
+
+      refresh();
+    })();
+  </script>
+</body>
+</html>

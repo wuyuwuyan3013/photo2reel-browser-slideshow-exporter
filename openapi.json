@@ -1,0 +1,9 @@
+{
+  "openapi": "3.1.0",
+  "info": {"title": "Photo2Reel public information", "version": "1.0.0", "description": "Read-only documentation endpoints for the public Photo2Reel browser tool."},
+  "servers": [{"url": "https://photo2reel.com"}],
+  "paths": {
+    "/ai/": {"get": {"summary": "Read the public service description", "responses": {"200": {"description": "Markdown service documentation", "content": {"text/markdown": {}}}}}},
+    "/llms-full.txt": {"get": {"summary": "Read the expanded machine-readable overview", "responses": {"200": {"description": "Plain-text overview", "content": {"text/plain": {}}}}}}
+  }
+}
