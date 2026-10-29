@@ -5,6 +5,7 @@ Photo2Reel has a new short-video planning studio preview and an existing browser
 ## Available tools
 
 - [Image-to-video planning](https://photo2reel.com/image-to-video/): a plain-language image-to-video landing page that describes the Studio workflow, the public service boundary, and links to the relevant troubleshooting guides.
+- [Single image or storyboard](https://photo2reel.com/image-to-video-single-image-vs-storyboard/): choose source material for a contained one-image animation versus a multi-shot image-to-video sequence; this page is planning guidance and does not call a generation model.
 - [Studio preview](https://photo2reel.com/studio/): plan a single-image clip or multi-scene storyboard, write motion prompts and prepare a publishing plan. This preview saves local drafts; AI generation and social account connections are not configured.
 - [Local slideshow maker](https://photo2reel.com/slideshow/): choose local images, set per-image duration, add optional audio and export a video in the browser.
 - [Privacy](https://photo2reel.com/privacy): data-handling information.

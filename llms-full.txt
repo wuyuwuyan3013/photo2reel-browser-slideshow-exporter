@@ -18,6 +18,7 @@ The preview does not transmit user assets to an AI service or social platform. L
 
 - https://photo2reel.com/
 - https://photo2reel.com/image-to-video/
+- https://photo2reel.com/image-to-video-single-image-vs-storyboard/
 - https://photo2reel.com/studio/
 - https://photo2reel.com/slideshow/
 - https://photo2reel.com/privacy
