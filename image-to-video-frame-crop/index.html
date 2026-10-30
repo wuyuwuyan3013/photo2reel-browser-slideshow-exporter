@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The model never sees your photo. It sees a resized, re-cropped copy of it. How to pick the frame before you upload, and why a blurry result is usually your input.">
+  <link rel="canonical" href="https://photo2reel.com/image-to-video-frame-crop/">
+  <title>Image to Video: Start From the Frame You Actually Want</title>
+  <style>
+    :root{--ink:#eef5ff;--muted:#b7c4dc;--panel:#14213b;--line:rgba(205,222,255,.18);--aqua:#64f2d2;--blue:#86aefb}*{box-sizing:border-box}html{background:#091426}body{margin:0;background:radial-gradient(circle at 90% 2%,#283e78 0,transparent 30rem),#091426;color:var(--ink);font:16px/1.65 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.shell{width:min(900px,calc(100% - 32px));margin:auto}header,footer{display:flex;align-items:center;gap:18px}header{padding:25px 0}.brand{color:var(--ink);font-size:1.2rem;font-weight:800;letter-spacing:-.04em;text-decoration:none}.brand i{color:var(--aqua);font-style:normal}.site-nav{display:flex;flex-wrap:wrap;gap:14px;margin-left:auto}.site-nav a{color:var(--muted);font-size:.88rem;font-weight:700;text-decoration:none}.site-nav a:hover{color:var(--aqua)}.tag{border:1px solid var(--line);border-radius:999px;color:var(--aqua);font-size:.77rem;font-weight:800;padding:6px 10px;white-space:nowrap}.hero{padding:54px 0 42px}.eyebrow{color:var(--aqua);font-size:.8rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}h1{font-size:clamp(2.3rem,6vw,4.9rem);letter-spacing:-.065em;line-height:.96;margin:13px 0 20px;max-width:850px}.lead{color:var(--muted);font-size:1.16rem;max-width:740px}.answer{border:1px solid rgba(100,242,210,.42);border-radius:20px;background:rgba(100,242,210,.075);padding:23px 25px;margin:28px 0 0}.answer h2{font-size:1.13rem;margin:0 0 8px}.answer p{margin:0;color:#dce8fa}.article{padding:30px 0 72px}.article h2{font-size:clamp(1.55rem,3vw,2.2rem);letter-spacing:-.04em;margin:42px 0 13px}.article h3{font-size:1.08rem;margin:28px 0 8px}.article p,.article li{color:#c9d5e9}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:22px 0}.card{border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.045);padding:18px}.card b{color:var(--aqua);display:block;margin-bottom:5px}.prompt{background:#071226;border:1px solid var(--line);border-radius:14px;color:#dce8fa;margin:16px 0;padding:17px;white-space:pre-wrap}.prompt strong{color:var(--aqua);display:block;margin-bottom:6px}.steps{counter-reset:item;list-style:none;padding:0;display:grid;gap:11px}.steps li{position:relative;padding:14px 15px 14px 52px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.035)}.steps li:before{counter-increment:item;content:counter(item);position:absolute;left:15px;top:14px;color:#071b1a;background:var(--aqua);border-radius:50%;font-size:.78rem;font-weight:900;width:23px;height:23px;text-align:center;line-height:23px}.cta{display:inline-flex;background:var(--aqua);border-radius:12px;color:#06211b;font-weight:900;margin-top:8px;padding:12px 16px;text-decoration:none}figure{margin:26px 0}figure svg{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:16px;background:#071226}figcaption{color:var(--muted);font-size:.83rem;margin-top:9px;line-height:1.5}footer{border-top:1px solid var(--line);color:var(--muted);font-size:.8rem;padding:23px 0 35px;flex-wrap:wrap}footer .site-nav{margin-left:0}footer p{margin:0}@media(max-width:640px){.shell{width:min(100% - 24px,620px)}header{align-items:flex-start;flex-wrap:wrap}.site-nav{margin-left:0;width:100%;order:3}.hero{padding:34px 0}.grid{grid-template-columns:1fr}.tag{margin-left:auto}footer{display:block}footer .site-nav{margin:12px 0}h1{font-size:2.5rem}figure{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}figure svg{min-width:760px}figcaption{min-width:0}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header><a class="brand" href="/">Photo<i>2Reel</i></a><nav class="site-nav" aria-label="Site navigation"><a href="/">Home</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/contact">Contact</a></nav><span class="tag">FRAME</span></header>
+    <section class="hero">
+      <div class="eyebrow">Before you upload</div>
+      <h1>Image to video: start from the frame you actually want.</h1>
+      <p class="lead">The model does not look at your photo. It looks at a resized, re-cropped copy of it, made to fit a frame you never chose. Whatever fell outside that frame is not in the video, and no prompt brings it back. This is the step before every other step.</p>
+      <div class="answer"><h2>The short answer</h2><p><b>Decide the output frame first, then crop your photo to it yourself.</b> A portrait photo going into a landscape output gets cut by software that does not know what matters in your image — usually the middle band, which is often the least interesting part. Crop it to the target ratio before uploading and you keep the decision. Leave it and the software decides for you, silently, and you find out after you have paid for the render.</p></div>
+    </section>
+    <article class="article">
+
+      <h2>Two resamples happen before you see a single frame</h2>
+      <p>This is the part that explains most "the result does not look like my photo" complaints, and almost nobody describes it.</p>
+      <p>Your file goes through at least two conversions. First it is scaled to whatever internal size the model works at — usually smaller than your original, sometimes much smaller. Then the output is written at the delivery frame you selected. Neither step is lossless, and neither one asks you what should be preserved.</p>
+
+      <figure>
+        <svg viewBox="0 0 860 320" role="img" aria-label="Two resamples between your photo and the finished clip">
+          <rect width="860" height="320" fill="#071226"/>
+          <text x="30" y="40" fill="#64f2d2" font-family="system-ui,sans-serif" font-size="15" font-weight="700" letter-spacing="2">WHAT ACTUALLY HAPPENS TO YOUR FILE</text>
+          <g font-family="system-ui,sans-serif">
+            <rect x="30" y="76" width="180" height="120" rx="10" fill="rgba(134,174,251,.08)" stroke="rgba(134,174,251,.5)"/>
+            <text x="46" y="104" fill="#86aefb" font-size="12.5" font-weight="800">1 · YOUR PHOTO</text>
+            <text x="46" y="130" fill="#eef5ff" font-size="13">Whatever ratio</text>
+            <text x="46" y="150" fill="#eef5ff" font-size="13">you shot it at</text>
+            <text x="46" y="176" fill="#b7c4dc" font-size="11.5">You know what matters</text>
+
+            <text x="222" y="140" fill="#64f2d2" font-size="20">→</text>
+
+            <rect x="252" y="76" width="180" height="120" rx="10" fill="rgba(255,255,255,.04)" stroke="rgba(205,222,255,.28)"/>
+            <text x="268" y="104" fill="#c9d5e9" font-size="12.5" font-weight="800">2 · MODEL INPUT</text>
+            <text x="268" y="130" fill="#eef5ff" font-size="13">Scaled to the</text>
+            <text x="268" y="150" fill="#eef5ff" font-size="13">model's own size</text>
+            <text x="268" y="176" fill="#b7c4dc" font-size="11.5">Detail is discarded here</text>
+
+            <text x="444" y="140" fill="#64f2d2" font-size="20">→</text>
+
+            <rect x="474" y="76" width="180" height="120" rx="10" fill="rgba(255,255,255,.04)" stroke="rgba(205,222,255,.28)"/>
+            <text x="490" y="104" fill="#c9d5e9" font-size="12.5" font-weight="800">3 · OUTPUT FRAME</text>
+            <text x="490" y="130" fill="#eef5ff" font-size="13">The ratio you</text>
+            <text x="490" y="150" fill="#eef5ff" font-size="13">picked at export</text>
+            <text x="490" y="176" fill="#b7c4dc" font-size="11.5">Composition decided here</text>
+
+            <text x="666" y="140" fill="#64f2d2" font-size="20">→</text>
+
+            <rect x="696" y="76" width="134" height="120" rx="10" fill="rgba(100,242,210,.1)" stroke="rgba(100,242,210,.55)"/>
+            <text x="712" y="104" fill="#64f2d2" font-size="12.5" font-weight="800">4 · THE CLIP</text>
+            <text x="712" y="132" fill="#eef5ff" font-size="13">Moves, and</text>
+            <text x="712" y="152" fill="#eef5ff" font-size="13">looks nothing</text>
+            <text x="712" y="172" fill="#eef5ff" font-size="13">like your file</text>
+          </g>
+          <text x="30" y="238" fill="#8fa3c4" font-family="system-ui,sans-serif" font-size="12.5">Steps 2 and 3 both change the composition. Only step 1 is yours to control.</text>
+          <text x="30" y="262" fill="#8fa3c4" font-family="system-ui,sans-serif" font-size="12.5">Nothing in a text prompt can undo a crop that already happened.</text>
+        </svg>
+        <figcaption>Two resamples, two chances to lose the part of the photo you cared about. Only the first one is yours.</figcaption>
+      </figure>
+
+      <p>This is why a sharp original can come back soft, and why a wide shot can come back as a close-up of a wall. Neither is the model misunderstanding you. Both are the frame being decided by something that is not you.</p>
+
+      <h2>Pick the frame, then crop to it</h2>
+      <p>Three delivery frames cover almost everything. The right starting move is different for each, and none of them is "upload as is".</p>
+
+      <figure>
+        <svg viewBox="0 0 860 330" role="img" aria-label="How to prepare a portrait photo for three different output frames">
+          <rect width="860" height="330" fill="#071226"/>
+          <text x="30" y="40" fill="#64f2d2" font-family="system-ui,sans-serif" font-size="15" font-weight="700" letter-spacing="2">ONE PORTRAIT PHOTO · THREE DELIVERY FRAMES</text>
+          <g font-family="system-ui,sans-serif">
+            <rect x="30" y="70" width="150" height="190" rx="10" fill="rgba(134,174,251,.08)" stroke="rgba(134,174,251,.5)"/>
+            <text x="46" y="96" fill="#86aefb" font-size="12.5" font-weight="800">SOURCE</text>
+            <rect x="60" y="110" width="90" height="130" rx="4" fill="rgba(255,255,255,.12)"/>
+            <text x="46" y="258" fill="#b7c4dc" font-size="11.5">tall, subject centred</text>
+
+            <rect x="212" y="70" width="196" height="190" rx="10" fill="rgba(255,255,255,.04)" stroke="rgba(205,222,255,.28)"/>
+            <text x="228" y="96" fill="#c9d5e9" font-size="12.5" font-weight="800">9:16 · VERTICAL</text>
+            <rect x="248" y="112" width="72" height="128" rx="4" fill="rgba(100,242,210,.22)" stroke="rgba(100,242,210,.7)"/>
+            <text x="228" y="258" fill="#b7c4dc" font-size="11.5">Keep it. Leave headroom</text>
+            <text x="228" y="274" fill="#b7c4dc" font-size="11.5">for captions.</text>
+
+            <rect x="430" y="70" width="196" height="190" rx="10" fill="rgba(255,255,255,.04)" stroke="rgba(205,222,255,.28)"/>
+            <text x="446" y="96" fill="#c9d5e9" font-size="12.5" font-weight="800">16:9 · LANDSCAPE</text>
+            <rect x="466" y="146" width="128" height="72" rx="4" fill="rgba(255,180,120,.18)" stroke="rgba(255,180,120,.7)"/>
+            <text x="446" y="258" fill="#b7c4dc" font-size="11.5">A band gets cut. Choose</text>
+            <text x="446" y="274" fill="#b7c4dc" font-size="11.5">the band yourself.</text>
+
+            <rect x="648" y="70" width="182" height="190" rx="10" fill="rgba(255,255,255,.04)" stroke="rgba(205,222,255,.28)"/>
+            <text x="664" y="96" fill="#c9d5e9" font-size="12.5" font-weight="800">1:1 · SQUARE</text>
+            <rect x="684" y="128" width="108" height="108" rx="4" fill="rgba(160,140,255,.2)" stroke="rgba(160,140,255,.7)"/>
+            <text x="664" y="258" fill="#b7c4dc" font-size="11.5">Crop around the subject,</text>
+            <text x="664" y="274" fill="#b7c4dc" font-size="11.5">not around the middle.</text>
+          </g>
+        </svg>
+        <figcaption>The same photo, three frames, three different crops. Doing this yourself takes a minute; leaving it to the service costs a render.</figcaption>
+      </figure>
+
+      <div class="grid">
+        <div class="card"><b>Vertical, from a portrait photo</b>The easiest case, and the one people overthink. Crop only if the photo has dead space at top or bottom. Keep headroom if you plan to burn captions in later — that space will be covered.</div>
+        <div class="card"><b>Landscape, from a portrait photo</b>The hardest case. You are removing most of the height, so decide deliberately which band survives: the face, the product, or the horizon. The service's default will take the centre, which is rarely the best band.</div>
+        <div class="card"><b>Square, from anything</b>Least loss, most flexibility. Crop tight around the subject rather than centring the whole frame, because a square forces a decision that a rectangle lets you avoid.</div>
+        <div class="card"><b>What not to do</b>Do not upload a 3:2 photo and ask for 9:16 with "keep everything". It cannot. Something is being removed, and you are choosing not to be the one who decides.</div>
+      </div>
+
+      <h2>Three ways a vertical clip fails before generation starts</h2>
+      <p>These are composition failures, not model failures. They are all decided in the crop, and all three are cheap to avoid.</p>
+      <ol class="steps">
+        <li><b>The head is cut, or the feet are.</b>Vertical frames are unforgiving. If the subject's head sits near the top edge of the source, the first crop clips it. Pull the crop down before uploading, and leave a margin.</li>
+        <li><b>The caption zone is eaten.</b>Most vertical platforms overlay text and controls near the bottom. If your subject sits there, it will be covered. Leave the bottom band empty on purpose.</li>
+        <li><b>The subject sits dead centre in a tall frame.</b>A centred subject in 9:16 leaves two dead bands. Move the crop so the subject occupies the upper third and the lower third carries the motion or the caption.</li>
+      </ol>
+
+      <h2>Why the result comes back blurry</h2>
+      <p>This is one of the most common searches in this category, and the usual assumption — that the model is low quality — is often wrong. Blur has three causes, and only one of them is the model.</p>
+      <div class="grid">
+        <div class="card"><b>Cause one: the source was already soft</b>A screenshot of a photo, a re-saved image, a crop taken from a larger picture. If the detail is not in the file you uploaded, it cannot appear in the output. Check the file at 100% before blaming the service.</div>
+        <div class="card"><b>Cause two: the crop was enlarged</b>Take a small region and stretch it to fill a frame and you have invented pixels. The model will faithfully animate the invented ones. Crop from the largest version of the photo you have, not from a thumbnail.</div>
+        <div class="card"><b>Cause three: the model input is smaller than your file</b>As in the diagram above, the model works at its own internal size. A very large upload does not survive at full detail. This is the only case where the service is responsible.</div>
+        <div class="card"><b>What does not fix it</b>Adding "4K, sharp, high detail" to the prompt. Sharpness is decided by pixels that exist, not by adjectives. A prompt cannot restore detail that the resample removed.</div>
+      </div>
+      <p>The practical test: open the file you are about to upload at 100%, in the crop you intend to use. If it looks soft there, it will look soft in the video. That check takes ten seconds and saves a render.</p>
+
+      <h2>Sixty seconds before you upload</h2>
+      <ol class="steps">
+        <li><b>Name the delivery frame.</b>9:16, 16:9, or 1:1. Not "I will decide at export" — the export choice is what cuts your photo.</li>
+        <li><b>Crop to that ratio yourself, in the largest version you have.</b>Any editor will do, including the browser. The point is that you choose the band, not the service.</li>
+        <li><b>Look at the crop at 100%.</b>Soft now means soft later. Fix it by finding a better source, not by adding adjectives.</li>
+        <li><b>Leave the caption band empty</b>if the clip is going anywhere that overlays text at the bottom.</li>
+        <li><b>Then describe the motion.</b>The prompt comes after the frame, never before it.</li>
+      </ol>
+
+      <h2>Where the crop happens on this site</h2>
+      <p>Both tools here work on the frame before anything moves, and both run inside the browser with no upload — which matters here, because the file you are cropping is often the only copy you have at full size.</p>
+      <div class="grid">
+        <div class="card"><b>If the output is a slideshow</b>Give each photo its own duration, add a track, export. The frame is set by the project, and nothing leaves the machine. <a href="/slideshow/">Slideshow maker</a>.</div>
+        <div class="card"><b>If the output is vertical</b>Photos plus a line of text into a 1080×1920 clip, with cuts that can land on the beat. <a href="/short-video/">Vertical clip maker</a>.</div>
+        <div class="card"><b>If you need the picture itself to move</b>That is a different class of tool, and the frame still has to be decided first. <a href="/image-to-video/">Plan the shot</a>.</div>
+        <div class="card"><b>If you are choosing a service</b>The unit price is not the cost — retries are. <a href="/image-to-video-cost/">What five seconds costs</a>.</div>
+      </div>
+
+      <h2>The order that saves renders</h2>
+      <p>Frame, then crop, then check at 100%, then describe motion, then generate. Every step after the crop is reversible. The crop is the one decision you cannot undo after paying.</p>
+      <p>If you only take one thing from this page: the model is not looking at your photo. It is looking at a copy that already lost the argument about what matters. Win that argument yourself, before the upload button.</p>
+    </article>
+    <footer>
+      <span>© 2026 Photo2Reel</span>
+      <nav class="site-nav" aria-label="Footer navigation"><a href="/">Home</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/contact">Contact</a></nav>
+      <p style="width:100%;margin-top:10px">This site may display third-party ads, and some outbound links may be affiliate links that earn a commission if you buy something. Recommendations are written the same way either way.</p>
+    </footer>
+  </main>
+</body>
+</html>
