@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A practical handoff checklist for an image-to-video render: make one clear version, route it intentionally, and learn from one review question.">
+  <link rel="canonical" href="https://photo2reel.com/image-to-video-post-generation-handoff/">
+  <title>Image to Video After Generation: A Handoff Checklist | Photo2Reel</title>
+  <style>
+    :root{--ink:#eff6ff;--muted:#b7c6de;--panel:#14213b;--line:rgba(205,222,255,.18);--aqua:#62f1d1;--blue:#87aefd;--paper:#091426}*{box-sizing:border-box}html{background:var(--paper)}body{margin:0;background:radial-gradient(circle at 93% 0,#243f78 0,transparent 34rem),var(--paper);color:var(--ink);font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}.shell{width:min(980px,calc(100% - 32px));margin:auto}header,footer{display:flex;align-items:center;gap:18px}header{padding:25px 0}.brand{color:var(--ink);font-size:1.2rem;font-weight:850;letter-spacing:-.04em;text-decoration:none}.brand i{color:var(--aqua);font-style:normal}.site-nav{display:flex;flex-wrap:wrap;gap:14px;margin-left:auto}.site-nav a{color:var(--muted);font-size:.88rem;font-weight:700;text-decoration:none}.site-nav a:hover{color:var(--aqua)}.tag{border:1px solid var(--line);border-radius:999px;color:var(--aqua);font-size:.77rem;font-weight:800;padding:6px 10px;white-space:nowrap}.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);gap:36px;align-items:center;padding:48px 0 42px}.eyebrow{color:var(--aqua);font-size:.78rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}h1{font-size:clamp(2.25rem,5.5vw,4.45rem);letter-spacing:-.065em;line-height:.97;margin:13px 0 18px}.lead{color:var(--muted);font-size:1.13rem;max-width:650px}.answer{border:1px solid rgba(98,241,209,.42);border-radius:20px;background:rgba(98,241,209,.075);padding:21px 23px;margin-top:25px}.answer h2{font-size:1.08rem;margin:0 0 7px}.answer p{margin:0;color:#dce8fa}.hero figure{margin:0;border:1px solid var(--line);border-radius:19px;background:#0a162d;padding:10px;box-shadow:0 16px 44px rgba(0,0,0,.22)}.hero img{display:block;width:100%;height:auto;border-radius:12px}.hero figcaption{color:var(--muted);font-size:.8rem;line-height:1.5;padding:9px 2px 1px}.article{padding:14px 0 70px}.article h2{font-size:clamp(1.55rem,3vw,2.25rem);letter-spacing:-.04em;line-height:1.15;margin:48px 0 13px}.article h3{font-size:1.08rem;margin:0 0 8px}.article p,.article li{color:#c9d5e9}.intro{max-width:760px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:21px 0}.card{border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.045);padding:18px}.card b{color:var(--aqua);display:block;margin-bottom:6px}.card p{margin:0;font-size:14px}.receipt{display:grid;grid-template-columns:190px 1fr;gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#0b1830;margin:21px 0}.receipt strong{display:flex;align-items:center;padding:17px 18px;background:rgba(134,174,251,.11);color:var(--blue);font-size:14px}.receipt p{margin:0;padding:17px 18px;font-size:14px}.steps{counter-reset:item;list-style:none;padding:0;display:grid;gap:11px}.steps li{position:relative;padding:15px 17px 15px 54px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.035)}.steps li:before{counter-increment:item;content:counter(item);position:absolute;left:16px;top:16px;color:#071b1a;background:var(--aqua);border-radius:50%;font-size:.77rem;font-weight:900;width:23px;height:23px;text-align:center;line-height:23px}.compare{width:100%;border-collapse:collapse;margin:20px 0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.025)}.compare th,.compare td{padding:14px 15px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.compare th{color:var(--aqua);font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:rgba(98,241,209,.06)}.compare td{color:#c9d5e9;font-size:14px}.compare tr:last-child td{border-bottom:0}.callout{border-left:4px solid var(--aqua);padding:7px 0 7px 18px;margin:22px 0;color:#dce8fa}.callout b{color:var(--aqua)}.source{font-size:13px;color:var(--muted);overflow-wrap:anywhere}.source a{color:var(--aqua)}.faq{display:grid;grid-template-columns:1fr 1fr;gap:12px}.faq details{padding:0 16px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.035)}.faq summary{padding:14px 20px 14px 0;color:var(--ink);font-size:14px;font-weight:800;cursor:pointer}.faq p{margin:0 0 15px;font-size:14px}.related{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.related a{border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--aqua);font-size:13px;font-weight:750;text-decoration:none}footer{border-top:1px solid var(--line);color:var(--muted);font-size:.8rem;padding:23px 0 35px;flex-wrap:wrap}footer .site-nav{margin-left:0}footer p{margin:0}@media(max-width:760px){.hero{grid-template-columns:1fr;gap:23px;padding-top:35px}.grid{grid-template-columns:1fr}.faq{grid-template-columns:1fr}.receipt{grid-template-columns:1fr}.site-nav{margin-left:0;width:100%}header{align-items:flex-start;flex-wrap:wrap}}@media(max-width:560px){.shell{width:min(100% - 24px,620px)}.hero{padding-bottom:26px}.article h2{margin-top:39px}.compare{display:block;overflow-x:auto}.compare th,.compare td{min-width:170px}.tag{margin-left:auto}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header><a class="brand" href="/">Photo<i>2Reel</i></a><nav class="site-nav" aria-label="Site navigation"><a href="/">Home</a><a href="/image-to-video/">Image to video</a><a href="/about">About</a><a href="/contact">Contact</a></nav><span class="tag">HANDOFF</span></header>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">After a render</div>
+        <h1>An image-to-video render is not finished when it looks good.</h1>
+        <p class="lead">It is finished when the next person can tell which version is approved, where it can go, and what one result will teach you before the next render.</p>
+        <div class="answer"><h2>The short answer</h2><p><b>Make a handoff pack before you share.</b> Keep one named master, one stated destination, and one review question together. Creation makes the clip; distribution gives it a job; review decides whether the next version earns its time.</p></div>
+      </div>
+      <figure><img src="/images/image-to-video-handoff-workflow.png" width="2184" height="1229" alt="An original illustration of a rendered video moving through routing and review stages"><figcaption>One render, then a deliberate route and one useful review.</figcaption></figure>
+    </section>
+    <article class="article">
+      <h2>Make the handoff pack, not a loose exported file</h2>
+      <p class="intro">The easiest way to lose a usable clip is to send a file with no decision attached to it. A handoff pack is deliberately small: it makes the next action obvious without turning a short video into a paperwork project.</p>
+      <div class="grid">
+        <section class="card"><b>1 · The master</b><p>Save the version you intend to judge. Give it a name that describes the scene and the change, rather than a vague final-final label.</p></section>
+        <section class="card"><b>2 · The route</b><p>Name the one place this version is meant to appear and the frame that belongs there. A master can later be adapted, but it should begin with a primary job.</p></section>
+        <section class="card"><b>3 · The question</b><p>Choose one thing to review: did the opening hold attention, did the product remain legible, or did the change read clearly? Do not review everything at once.</p></section>
+      </div>
+
+      <h2>Keep three receipts with the clip</h2>
+      <p>These are not platform metrics or promises. They are three plain records that keep a render from becoming an orphaned asset.</p>
+      <div class="receipt"><strong>Creation receipt</strong><p>Which source image, frame, and motion decision created this version? Keep enough context to repeat the one part that worked.</p></div>
+      <div class="receipt"><strong>Distribution receipt</strong><p>Where is this version going first, and what format or crop does that destination require? A new route is a new decision, not an automatic upload.</p></div>
+      <div class="receipt"><strong>Review receipt</strong><p>What one observable result will decide the next iteration? If there is no question, there is no reason to make another variation yet.</p></div>
+
+      <h2>A short workflow from render to learning</h2>
+      <ol class="steps">
+        <li><b>Freeze the version you are judging.</b> Do not overwrite the file while you are still deciding whether the motion works. A stable master gives the review a real subject.</li>
+        <li><b>Write its intended viewing situation.</b> Say what the viewer needs to understand in the opening moment, and where they are expected to see it. This turns “share it somewhere” into a testable route.</li>
+        <li><b>Adapt only after the master is approved.</b> A vertical crop, a square crop, and a new caption treatment are separate variants. Mark them as variants instead of mistaking them for the same file.</li>
+        <li><b>Record one observation, then choose one change.</b> Preserve the detail that worked and alter only the part the review question exposed. A useful next render has a reason.</li>
+      </ol>
+
+      <h2>Generation, distribution, and review are different jobs</h2>
+      <table class="compare"><thead><tr><th>Stage</th><th>The question it answers</th><th>What to carry forward</th></tr></thead><tbody>
+        <tr><td><b>Creation</b></td><td>Does the clip show the intended moment?</td><td>The source frame, the motion decision, and the approved master.</td></tr>
+        <tr><td><b>Distribution</b></td><td>Where should this exact version be seen first?</td><td>The destination, the frame treatment, and any variant label.</td></tr>
+        <tr><td><b>Review</b></td><td>What should the next version preserve or change?</td><td>One observation tied to one future decision.</td></tr>
+      </tbody></table>
+      <p class="callout"><b>Practical limit:</b> A good render does not prove that every crop or destination will work. Treat each new frame, caption treatment, or route as a new version with its own purpose.</p>
+
+      <h2>Why this page separates the jobs</h2>
+      <p>A 2022 Magisto product page framed business video work as a sequence of creation, cross-channel distribution, and audience analysis rather than as generation alone. That older workflow is useful here as a boundary: a rendering tool can supply the creation step, but it cannot choose a destination or decide what a result means for the next version.</p>
+      <p class="source">Historical source: <a href="https://arquivo.pt/wayback/20221221182717/https://www.magisto.com/" rel="nofollow">Magisto archive, 2022</a>. The source is used for the historical workflow distinction; its marketing copy and uplift claims are not reproduced or treated as a promise.</p>
+
+      <h2>Questions after you have a usable clip</h2>
+      <div class="faq">
+        <details><summary>Should I make every crop before I publish anything?</summary><p>No. Start with one primary route. Create a variant only when it has a different job, such as a new frame, a new opening, or a different viewing situation.</p></details>
+        <details><summary>What if a render is technically clean but says nothing?</summary><p>Return to the viewing question. If you cannot name what the viewer should understand, the issue is usually the scene decision, not a missing effect.</p></details>
+        <details><summary>Is a distribution receipt a publishing schedule?</summary><p>No. It is a simple statement of where the version belongs first. A schedule can come later; the receipt prevents an export from losing its purpose.</p></details>
+        <details><summary>When should I render again?</summary><p>After the review identifies one specific change worth testing. Re-rendering without a changed decision only produces more files to sort.</p></details>
+      </div>
+
+      <h2>Related planning guides</h2>
+      <p>Use the source-input guide before generation, then use this handoff checklist after you have a version worth judging.</p>
+      <div class="related"><a href="/image-to-video-single-image-vs-storyboard/">Choose one image or a storyboard</a><a href="/image-to-video-frame-planning/">Plan the frame before generation</a><a href="/image-to-video-motion-prompts/">Write the motion prompt</a><a href="/image-to-video/">Build the broader image-to-video brief</a></div>
+    </article>
+    <footer><span>© 2026 Photo2Reel</span><nav class="site-nav" aria-label="Footer navigation"><a href="/">Home</a><a href="/privacy">Privacy</a><a href="/contact">Contact</a></nav></footer>
+  </main>
+</body>
+</html>
