@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Photo2Reel video renderer</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #0b1020; color: #f8fafc; font-family: Arial, Helvetica, sans-serif; }
+    main { width: min(96vw, 1280px); padding: 24px 0; }
+    canvas { width: 100%; height: auto; display: block; border-radius: 16px; box-shadow: 0 20px 70px rgba(0,0,0,.45); background: #111827; }
+    .controls { margin-top: 16px; display: flex; align-items: center; gap: 14px; }
+    button, a.download { border: 0; border-radius: 9px; padding: 11px 16px; background: #79f2cb; color: #062b29; font-weight: 700; font-size: 15px; cursor: pointer; text-decoration: none; }
+    #state { color: #b9c5d5; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <main>
+    <canvas id="movie" width="1280" height="720" aria-label="Video preview"></canvas>
+    <div class="controls"><button id="record">Record 48-second video</button><span id="state">Preview ready.</span></div>
+  </main>
+<script>
+(() => {
+  const canvas = document.querySelector('#movie');
+  const ctx = canvas.getContext('2d');
+  const button = document.querySelector('#record');
+  const state = document.querySelector('#state');
+  const W = canvas.width, H = canvas.height;
+  const slides = [
+    { image: '/images/image-to-video-photo-readiness.png', eyebrow: 'PHOTO2REEL / SOURCE CHECK', title: 'Is your photo ready for image-to-video?', caption: 'A photo can be easy to upload and still be hard to animate.', note: 'Check the source before you write the prompt.' },
+    { image: '/images/image-to-video-single-vs-storyboard.png', eyebrow: 'CHECK ONE', title: 'Name the one subject that must stay clear.', caption: 'If the subject is ambiguous, movement gives the model too many choices.', note: 'One focal subject first.' },
+    { image: '/images/image-to-video-frame-planning.png', eyebrow: 'CHECK TWO', title: 'Protect the crop around the detail that matters.', caption: 'Leave visual room for the motion you expect to see.', note: 'Crop is a motion decision.' },
+    { image: '/images/image-to-video-asset-kit.png', eyebrow: 'CHECK THREE', title: 'Give motion at least two visible layers.', caption: 'Foreground and background cues make depth easier to read.', note: 'Depth cues guide believable change.' },
+    { image: '/images/image-to-video-one-change-test.png', eyebrow: 'WHEN A CHECK FAILS', title: 'Fix the source before changing the prompt.', caption: 'A better prompt cannot reliably restore a missing subject, crop, or depth cue.', note: 'Repair the photo, then generate.' },
+    { image: '/images/image-to-video-handoff-workflow.png', eyebrow: 'THE WORKFLOW', title: 'Test one small movement, then review again.', caption: 'Subject. Crop. Depth. Keep the same three checks after the first result.', note: 'Read the full checklist at Photo2Reel.' }
+  ];
+  const imgCache = new Map();
+  const loadImage = (src) => new Promise((resolve, reject) => { const im = new Image(); im.onload = () => resolve(im); im.onerror = reject; im.src = src; });
+  function roundRect(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
+  function cover(im) { const s = Math.max(W / im.width, H / im.height); const w = im.width * s, h = im.height * s; ctx.drawImage(im, (W - w) / 2, (H - h) / 2, w, h); }
+  function wrap(text, maxWidth, font) { ctx.font = font; const words = text.split(' '); const lines = []; let line = ''; for (const word of words) { const test = line ? line + ' ' + word : word; if (ctx.measureText(test).width > maxWidth && line) { lines.push(line); line = word; } else line = test; } if (line) lines.push(line); return lines; }
+  function drawSlide(index, progress = 0) {
+    const s = slides[index]; const image = imgCache.get(s.image); ctx.clearRect(0,0,W,H); cover(image); ctx.fillStyle = 'rgba(3, 11, 28, .70)'; ctx.fillRect(0,0,W,H);
+    const left = 76; roundRect(left, 66, 236, 38, 19); ctx.fillStyle = 'rgba(121,242,203,.96)'; ctx.fill(); ctx.fillStyle = '#062b29'; ctx.font = '700 16px Arial'; ctx.textBaseline = 'middle'; ctx.fillText(s.eyebrow, left + 18, 85);
+    ctx.textBaseline = 'alphabetic'; ctx.fillStyle = '#ffffff'; ctx.font = '700 62px Arial'; const titleLines = wrap(s.title, 890, '700 62px Arial'); titleLines.forEach((line, n) => ctx.fillText(line, left, 226 + n * 72));
+    const bodyY = 248 + titleLines.length * 72; roundRect(left, bodyY, 965, 116, 18); ctx.fillStyle = 'rgba(6,20,40,.76)'; ctx.fill(); ctx.fillStyle = '#e8f0fa'; ctx.font = '400 30px Arial'; const captionLines = wrap(s.caption, 900, '400 30px Arial'); captionLines.forEach((line,n)=>ctx.fillText(line,left+28,bodyY+47+n*36));
+    ctx.fillStyle = '#b8f5df'; ctx.font = '700 25px Arial'; ctx.fillText(s.note, left, 606); ctx.fillStyle = 'rgba(255,255,255,.35)'; ctx.fillRect(left, 656, W-left*2, 8); ctx.fillStyle = '#79f2cb'; ctx.fillRect(left, 656, (W-left*2)*progress, 8); ctx.fillStyle = 'rgba(255,255,255,.66)'; ctx.font = '600 16px Arial'; ctx.fillText(`${String(index + 1).padStart(2,'0')} / ${String(slides.length).padStart(2,'0')}`, W - 145, 616);
+  }
+  async function preload() { await Promise.all(slides.map(async s => imgCache.set(s.image, await loadImage(s.image)))); drawSlide(0, 0); }
+  function renderAt(ms) { const total = 48000, perSlide = total / slides.length; const safe = Math.min(ms, total - 1); const i = Math.min(slides.length - 1, Math.floor(safe / perSlide)); const local = (safe - i * perSlide) / perSlide; drawSlide(i, (i + local) / slides.length); }
+  button.addEventListener('click', () => {
+    button.disabled = true; button.textContent = 'Recording…'; const stream = canvas.captureStream(30); const chunks = []; const recorder = new MediaRecorder(stream, { mimeType: 'video/webm;codecs=vp9' });
+    recorder.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
+    recorder.onstop = () => { const blob = new Blob(chunks, { type: 'video/webm' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'photo2reel-photo-readiness-check.webm'; a.className = 'download'; a.textContent = 'Download finished video'; document.querySelector('.controls').append(a); state.textContent = `Finished: ${(blob.size / 1024 / 1024).toFixed(1)} MB. Download is ready.`; a.click(); };
+    const start = performance.now(); recorder.start(1000); const frame = now => { const elapsed = now - start; renderAt(elapsed); state.textContent = `Recording ${Math.min(48, Math.ceil(elapsed / 1000))} / 48 seconds…`; if (elapsed < 48000) requestAnimationFrame(frame); else recorder.stop(); }; requestAnimationFrame(frame);
+  });
+  preload().catch(err => state.textContent = 'Could not load an original image: ' + err.message);
+})();
+</script>
+</body>
+</html>
