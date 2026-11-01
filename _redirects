@@ -10,3 +10,13 @@
 /photo-slideshow-maker/ / 301
 /create-video-from-photos/ / 301
 /instagram-slideshow/ / 301
+
+# 2026-11-01：GSC 报告的历史 404 别名；只映射到语义相同且已实测直达 200 的现有页面
+/turn-pictures-into-video/ /how-to-make-photos-into-a-video/ 301
+/turn-photos-into-video/ /how-to-make-photos-into-a-video/ 301
+/make-a-video-out-of-photos/ /how-to-make-photos-into-a-video/ 301
+/create-video-from-images/ /image-to-video/ 301
+/picture-to-video/ /image-to-video/ 301
+/video-with-pictures-and-music/ /how-to-make-a-slideshow-with-music/ 301
+/slideshow-maker-with-music/ /how-to-make-a-slideshow-with-music/ 301
+/free-slideshow-maker/ /free-slideshow-maker-without-watermark/ 301
