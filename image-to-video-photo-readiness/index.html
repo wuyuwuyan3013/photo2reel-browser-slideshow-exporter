@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Check whether one photo is ready for image-to-video before you generate: confirm the subject, crop, and depth cues that give a motion prompt something stable to preserve.">
+  <link rel="canonical" href="https://photo2reel.com/image-to-video-photo-readiness/">
+  <title>Is One Photo Ready for Image-to-Video? | Photo2Reel</title>
+  <style>
+    :root{--ink:#eff6ff;--muted:#b7c6de;--line:rgba(205,222,255,.18);--aqua:#62f1d1;--blue:#87aefd;--paper:#091426;--panel:#0b1830}*{box-sizing:border-box}html{background:var(--paper)}body{margin:0;background:radial-gradient(circle at 93% 0,#243f78 0,transparent 34rem),var(--paper);color:var(--ink);font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}.shell{width:min(980px,calc(100% - 32px));margin:auto}header,footer{display:flex;align-items:center;gap:18px}header{padding:25px 0}.brand{color:var(--ink);font-size:1.2rem;font-weight:850;letter-spacing:-.04em;text-decoration:none}.brand i{color:var(--aqua);font-style:normal}.site-nav{display:flex;flex-wrap:wrap;gap:14px;margin-left:auto}.site-nav a{color:var(--muted);font-size:.88rem;font-weight:700;text-decoration:none}.site-nav a:hover{color:var(--aqua)}.tag{border:1px solid var(--line);border-radius:999px;color:var(--aqua);font-size:.77rem;font-weight:800;padding:6px 10px;white-space:nowrap}.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);gap:36px;align-items:center;padding:48px 0 42px}.eyebrow{color:var(--aqua);font-size:.78rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}h1{font-size:clamp(2.25rem,5.5vw,4.45rem);letter-spacing:-.065em;line-height:.97;margin:13px 0 18px}.lead{color:var(--muted);font-size:1.13rem;max-width:650px}.answer{border:1px solid rgba(98,241,209,.42);border-radius:20px;background:rgba(98,241,209,.075);padding:21px 23px;margin-top:25px}.answer h2{font-size:1.08rem;margin:0 0 7px}.answer p{margin:0;color:#dce8fa}.hero figure{margin:0;border:1px solid var(--line);border-radius:19px;background:#0a162d;padding:10px;box-shadow:0 16px 44px rgba(0,0,0,.22)}.hero img{display:block;width:100%;height:auto;border-radius:12px}.hero figcaption{color:var(--muted);font-size:.8rem;line-height:1.5;padding:9px 2px 1px}.article{padding:14px 0 70px}.article h2{font-size:clamp(1.55rem,3vw,2.25rem);letter-spacing:-.04em;line-height:1.15;margin:48px 0 13px}.article h3{font-size:1.08rem;margin:0 0 8px}.article p,.article li{color:#c9d5e9}.intro{max-width:760px}.signal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;overflow:hidden;margin:23px 0;border:1px solid var(--line);border-radius:18px;background:var(--line)}.signal-grid section{padding:20px;background:linear-gradient(145deg,rgba(135,174,253,.12),rgba(98,241,209,.045))}.signal-grid b{display:block;color:var(--aqua);font-size:.82rem;letter-spacing:.08em;text-transform:uppercase}.signal-grid h3{margin:8px 0}.signal-grid p{margin:0;font-size:14px}.check{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:22px 0}.check section{padding:18px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.035)}.check h3{color:var(--aqua)}.check ul{margin:0;padding-left:18px}.check li{font-size:14px;margin:5px 0}.table{width:100%;border-collapse:collapse;margin:20px 0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.025)}.table th,.table td{padding:14px 15px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.table th{color:var(--aqua);font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:rgba(98,241,209,.06)}.table td{color:#c9d5e9;font-size:14px}.table tr:last-child td{border-bottom:0}.steps{counter-reset:item;list-style:none;padding:0;display:grid;gap:11px}.steps li{position:relative;padding:15px 17px 15px 54px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.035)}.steps li:before{counter-increment:item;content:counter(item);position:absolute;left:16px;top:16px;color:#071b1a;background:var(--aqua);border-radius:50%;font-size:.77rem;font-weight:900;width:23px;height:23px;text-align:center;line-height:23px}.callout{border-left:4px solid var(--aqua);padding:7px 0 7px 18px;margin:22px 0;color:#dce8fa}.callout b{color:var(--aqua)}.source{font-size:13px;color:var(--muted);overflow-wrap:anywhere}.source a{color:var(--aqua)}.faq{display:grid;grid-template-columns:1fr 1fr;gap:12px}.faq details{padding:0 16px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.035)}.faq summary{padding:14px 20px 14px 0;color:var(--ink);font-size:14px;font-weight:800;cursor:pointer}.faq p{margin:0 0 15px;font-size:14px}.related{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.related a{border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--aqua);font-size:13px;font-weight:750;text-decoration:none}footer{border-top:1px solid var(--line);color:var(--muted);font-size:.8rem;padding:23px 0 35px;flex-wrap:wrap}footer .site-nav{margin-left:0}footer p{margin:0}@media(max-width:760px){.hero{grid-template-columns:1fr;gap:23px;padding-top:35px}.signal-grid,.check,.faq{grid-template-columns:1fr}.site-nav{margin-left:0;width:100%}header{align-items:flex-start;flex-wrap:wrap}}@media(max-width:560px){.shell{width:min(100% - 24px,620px)}.hero{padding-bottom:26px}.article h2{margin-top:39px}.table{display:block;overflow-x:auto}.table th,.table td{min-width:170px}.tag{margin-left:auto}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header><a class="brand" href="/">Photo<i>2Reel</i></a><nav class="site-nav" aria-label="Site navigation"><a href="/">Home</a><a href="/image-to-video/">Image to video</a><a href="/about">About</a><a href="/contact">Contact</a></nav><span class="tag">PRECHECK</span></header>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Before the motion prompt</div>
+        <h1>Is one photo ready for image-to-video?</h1>
+        <p class="lead">A tool may accept one image, but acceptance is not the same as a motion-ready source. Check what a viewer can identify, what the crop protects, and what the scene gives the model room to move.</p>
+        <div class="answer"><h2>The short answer</h2><p><b>A photo is motion-ready when its subject, crop, and depth cues can survive a small change over time.</b> If the subject is unclear, the essential detail touches the edge, or every object sits on one flat plane, repair the source before you write the prompt.</p></div>
+      </div>
+      <figure><img src="/images/image-to-video-photo-readiness.png" width="1672" height="941" alt="Original illustration showing a lighthouse photo becoming a motion-ready source with subject, crop, and depth checks"><figcaption>A file can meet a one-photo minimum without giving a motion prompt a stable scene to protect.</figcaption></figure>
+    </section>
+    <article class="article">
+      <h2>Run three checks before generation</h2>
+      <p class="intro">This is not a quality score. It is a short way to decide whether a still has enough usable information for the specific movement you want. A ready photo can still produce an imperfect clip; the check simply prevents an avoidable source problem from being misread as a prompt problem.</p>
+      <div class="signal-grid">
+        <section><b>Check one</b><h3>Subject</h3><p>Name the one thing that must remain recognisable after movement starts. If two people, two products, or a crowded background compete for attention, decide which one owns the first moment.</p></section>
+        <section><b>Check two</b><h3>Crop</h3><p>Look for protected space around the detail that matters. A face, label, hand, or product edge pressed against the frame cannot safely absorb a camera move or an aspect-ratio crop.</p></section>
+        <section><b>Check three</b><h3>Depth</h3><p>Find at least two visible layers that could move differently: foreground and background, subject and setting, or a stable surface and a moving element. This gives motion a relationship to describe.</p></section>
+      </div>
+
+      <h2>Minimum input versus motion-ready input</h2>
+      <table class="table"><thead><tr><th>Question</th><th>Minimum input</th><th>Motion-ready input</th></tr></thead><tbody>
+        <tr><td>Can the tool accept it?</td><td>The file uploads as one image.</td><td>The file uploads, and you can name the visual detail the next clip must preserve.</td></tr>
+        <tr><td>What happens at the edge?</td><td>The main detail may be cropped tightly or cut off.</td><td>The essential subject has breathing room for the intended frame and small movement.</td></tr>
+        <tr><td>What can change?</td><td>The prompt must invent nearly every relationship.</td><td>The prompt can describe a modest change between visible layers, such as a foreground move against a stable setting.</td></tr>
+        <tr><td>What can you review?</td><td>Only whether a file was generated.</td><td>Whether the named subject, crop boundary, and scene relationship held through the clip.</td></tr>
+      </tbody></table>
+      <p class="callout"><b>Useful boundary:</b> Do not treat a single-image workflow as a smaller storyboard. A one-photo input gives the generator one visible starting scene; a storyboard supplies separate source decisions. Pick the workflow that matches the information you actually have.</p>
+
+      <h2>Fix the source, not the motion sentence</h2>
+      <div class="check">
+        <section><h3>If the subject is unclear</h3><ul><li>Choose a version with one obvious visual owner.</li><li>Remove a competing crop or choose a different first frame.</li><li>Write the motion around the chosen subject, not the whole scene.</li></ul></section>
+        <section><h3>If the crop is too tight</h3><ul><li>Use a wider source instead of asking the model to invent missing edges.</li><li>Reserve room around a product label, face, or action point.</li><li>Choose the intended aspect ratio before checking the edge space.</li></ul></section>
+        <section><h3>If the scene is flat</h3><ul><li>Look for an image with a foreground, middle distance, and background.</li><li>Use environmental motion only when a visible layer supports it.</li><li>Keep the requested camera move modest when depth is weak.</li></ul></section>
+        <section><h3>If a detail must not drift</h3><ul><li>Name the detail in the source record before prompting.</li><li>Make it large enough to inspect in the intended delivery frame.</li><li>Review that one detail before judging the rest of the result.</li></ul></section>
+      </div>
+
+      <h2>A four-step readiness preflight</h2>
+      <ol class="steps">
+        <li><b>Choose the intended frame.</b> Decide whether the finished clip is vertical, square, or landscape before you judge the crop. The same photo can be ready for one route and too tight for another.</li>
+        <li><b>Point to the visual owner.</b> State what must still be recognised after the first movement. If you cannot identify it in one phrase, simplify the source choice.</li>
+        <li><b>Mark the protected edge.</b> Identify the detail that cannot be lost to a crop, tilt, or camera move. Replace the source or widen the composition if there is no margin.</li>
+        <li><b>Name one relationship that can move.</b> Describe an observable pair, such as a stationary product against a changing light or a person against a distant background. Then test that one idea first.</li>
+      </ol>
+
+      <h2>Why one image is not automatically enough</h2>
+      <p>An archived TokkingHeads page from 2021 described a one-photo animation product that accepted a single image alongside other animation inputs. That is a capability boundary, not a promise that every uploaded photo is ready for every kind of motion. This guide turns that boundary into a source-photo check: first establish what the image can preserve, then choose a movement that fits it.</p>
+      <p class="source">Historical source: <a href="https://arquivo.pt/wayback/20211015134434/https://www.tokkingheads.com/" rel="nofollow">TokkingHeads archive, 2021</a>. The archive is used only to distinguish a one-photo minimum from a motion-ready source; no archived wording is reproduced.</p>
+
+      <h2>Questions about image-to-video photo readiness</h2>
+      <div class="faq">
+        <details><summary>Can a portrait be motion-ready if the background is plain?</summary><p>Yes, if the face is clearly framed and the motion is modest. Treat the person and the background as separate visual layers, and do not ask a flat image to support a large camera move it cannot show.</p></details>
+        <details><summary>Should I add empty space around the subject?</summary><p>Add it only where the intended crop or movement needs it. The goal is not a generic border; it is enough protected room for the details you must keep visible in the chosen frame.</p></details>
+        <details><summary>What if I want several different beats?</summary><p>Use a storyboard or separate source images when each beat needs a different composition. A single photo is a useful starting scene, not a substitute for source decisions you have not made.</p></details>
+        <details><summary>Does this check guarantee a stable result?</summary><p>No. It gives you a clearer source and a narrower first test. Keep a record of the source, route, and chosen review question so the next version has a visible basis for comparison.</p></details>
+      </div>
+
+      <h2>Related image-to-video planning guides</h2>
+      <p>Once the photo is ready, choose the input workflow, plan the frame, and keep the next comparison controlled.</p>
+      <div class="related"><a href="/image-to-video-single-image-vs-storyboard/">Choose one image or a storyboard</a><a href="/image-to-video-frame-planning/">Plan the frame before generation</a><a href="/image-to-video-one-change-test/">Test one image-to-video change</a><a href="/image-to-video-asset-kit/">Build an image-to-video asset kit</a></div>
+    </article>
+    <footer><span>© 2026 Photo2Reel</span><nav class="site-nav" aria-label="Footer navigation"><a href="/">Home</a><a href="/privacy">Privacy</a><a href="/contact">Contact</a></nav></footer>
+  </main>
+</body>
+</html>
