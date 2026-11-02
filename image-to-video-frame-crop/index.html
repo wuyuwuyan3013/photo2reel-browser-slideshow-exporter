@@ -21,6 +21,7 @@
     </section>
     <article class="article">
 
+      <figure data-image-backfill="image-to-video-frame-crop-1" style="margin:28px 0;border:1px solid rgba(205,222,255,.18);border-radius:18px;background:#0a162d;padding:10px;overflow:hidden"><img src="/images/backfill/image-to-video-frame-crop-01.svg" width="1200" height="675" decoding="async" alt="One source frame passing through two differently shaped crop windows before a final video frame" style="display:block;width:100%;height:auto;border-radius:12px"><figcaption style="color:#b7c6de;font-size:.84rem;line-height:1.5;padding:9px 3px 2px">The original crop and the final delivery frame can each change which source detail survives.</figcaption></figure>
       <h2>Two resamples happen before you see a single frame</h2>
       <p>This is the part that explains most "the result does not look like my photo" complaints, and almost nobody describes it.</p>
       <p>Your file goes through at least two conversions. First it is scaled to whatever internal size the model works at — usually smaller than your original, sometimes much smaller. Then the output is written at the delivery frame you selected. Neither step is lossless, and neither one asks you what should be preserved.</p>
@@ -68,6 +69,7 @@
 
       <p>This is why a sharp original can come back soft, and why a wide shot can come back as a close-up of a wall. Neither is the model misunderstanding you. Both are the frame being decided by something that is not you.</p>
 
+      <figure data-image-backfill="image-to-video-frame-crop-2" style="margin:28px 0;border:1px solid rgba(205,222,255,.18);border-radius:18px;background:#0a162d;padding:10px;overflow:hidden"><img src="/images/backfill/image-to-video-frame-crop-02.svg" width="1200" height="675" decoding="async" alt="A source photo branching into vertical, square, and landscape frames with different safe edges" style="display:block;width:100%;height:auto;border-radius:12px"><figcaption style="color:#b7c6de;font-size:.84rem;line-height:1.5;padding:9px 3px 2px">The planned frame determines what needs protected room in the source image.</figcaption></figure>
       <h2>Pick the frame, then crop to it</h2>
       <p>Three delivery frames cover almost everything. The right starting move is different for each, and none of them is "upload as is".</p>
 
@@ -110,6 +112,7 @@
         <div class="card"><b>What not to do</b>Do not upload a 3:2 photo and ask for 9:16 with "keep everything". It cannot. Something is being removed, and you are choosing not to be the one who decides.</div>
       </div>
 
+      <figure data-image-backfill="image-to-video-frame-crop-3" style="margin:28px 0;border:1px solid rgba(205,222,255,.18);border-radius:18px;background:#0a162d;padding:10px;overflow:hidden"><img src="/images/backfill/image-to-video-frame-crop-03.svg" width="1200" height="675" decoding="async" alt="A vertical picture frame with an important subject comfortably inside the safe area" style="display:block;width:100%;height:auto;border-radius:12px"><figcaption style="color:#b7c6de;font-size:.84rem;line-height:1.5;padding:9px 3px 2px">A safe source crop protects the visual owner before any prompt introduces movement.</figcaption></figure>
       <h2>Three ways a vertical clip fails before generation starts</h2>
       <p>These are composition failures, not model failures. They are all decided in the crop, and all three are cheap to avoid.</p>
       <ol class="steps">
