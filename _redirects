@@ -5,11 +5,11 @@
 /make-photos-into-video/ / 301
 /make-video-from-images/ / 301
 
-# 历史别名，原本指向上面那几个页面；一并直达首页，否则会变成两跳
+# 历史别名：指向语义对应的现行页，避免跳到首页后再找内容
 /photo-video-maker/ / 301
 /photo-slideshow-maker/ / 301
 /create-video-from-photos/ / 301
-/instagram-slideshow/ / 301
+/instagram-slideshow/ /short-video/ 301
 
 # 2026-11-01：GSC 报告的历史 404 别名；只映射到语义相同且已实测直达 200 的现有页面
 /image-to-video-positive-prompts/ /image-to-video-negative-prompts/ 301
@@ -17,6 +17,7 @@
 /turn-photos-into-video/ /how-to-make-photos-into-a-video/ 301
 /make-a-video-out-of-photos/ /how-to-make-photos-into-a-video/ 301
 /create-video-from-images/ /image-to-video/ 301
+/create-a-video-with-pictures/ /how-to-make-photos-into-a-video/ 301
 /picture-to-video/ /image-to-video/ 301
 /video-with-pictures-and-music/ /how-to-make-a-slideshow-with-music/ 301
 /slideshow-maker-with-music/ /how-to-make-a-slideshow-with-music/ 301
