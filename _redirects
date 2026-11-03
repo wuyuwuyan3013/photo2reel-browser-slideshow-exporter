@@ -12,6 +12,7 @@
 /instagram-slideshow/ / 301
 
 # 2026-11-01：GSC 报告的历史 404 别名；只映射到语义相同且已实测直达 200 的现有页面
+/image-to-video-positive-prompts/ /image-to-video-negative-prompts/ 301
 /turn-pictures-into-video/ /how-to-make-photos-into-a-video/ 301
 /turn-photos-into-video/ /how-to-make-photos-into-a-video/ 301
 /make-a-video-out-of-photos/ /how-to-make-photos-into-a-video/ 301
