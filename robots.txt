@@ -1,0 +1,56 @@
+# Photo2Reel crawl and AI-use policy
+# Search and answer composition are allowed; model-training collection is not.
+
+User-agent: *
+Allow: /
+Disallow: /agent-auth/
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+# AI search and user-triggered fetchers may read public pages.
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /agent-auth/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /agent-auth/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /agent-auth/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /agent-auth/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /agent-auth/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /agent-auth/
+
+# Model-training crawlers are not permitted to collect this site's content.
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+Sitemap: https://photo2reel.com/sitemap.xml

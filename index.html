@@ -183,5 +183,51 @@
     </footer>
     <p style="font-size:12.5px;color:#6b6580;padding-bottom:40px;margin:0">This site may display third-party ads, and some outbound links may be affiliate links that earn a commission if you buy something. Recommendations are written the same way either way.</p>
   </div>
+  <script>
+    (() => {
+      const modelContext = document.modelContext || navigator.modelContext;
+      if (!modelContext || typeof modelContext.registerTool !== 'function') return;
+
+      const guides = [
+        { title: 'Make photos into a video', url: '/how-to-make-photos-into-a-video/', topics: 'photos video order duration transitions audio export' },
+        { title: 'Make a slideshow with music', url: '/how-to-make-a-slideshow-with-music/', topics: 'slideshow music song audio beat timing' },
+        { title: 'Free slideshow maker without a watermark', url: '/free-slideshow-maker-without-watermark/', topics: 'free slideshow watermark local browser privacy' },
+        { title: 'Image to video: plan a clear shot', url: '/image-to-video/', topics: 'image video prompt motion subject frame' },
+        { title: 'Choose one image or a storyboard', url: '/image-to-video-single-image-vs-storyboard/', topics: 'single image storyboard source shots' },
+        { title: 'Plan crop room for a push-in', url: '/image-to-video-crop-room/', topics: 'crop room push in camera edge source' },
+        { title: 'Review an image-to-video render', url: '/image-to-video-render-review/', topics: 'review render details frame final motion' }
+      ];
+      const controller = new AbortController();
+      const findGuide = async ({ topic }) => {
+        const words = String(topic || '').toLowerCase().match(/[a-z0-9]+/g) || [];
+        const matches = guides.filter((guide) => words.some((word) => `${guide.title} ${guide.topics}`.toLowerCase().includes(word))).slice(0, 3);
+        const results = (matches.length ? matches : guides.slice(0, 3))
+          .map((guide) => `- ${guide.title}: ${new URL(guide.url, location.origin).href}`)
+          .join('\n');
+        return {
+          content: [{
+            type: 'text',
+            text: `Photo2Reel only returns public guide pages. It cannot access visitor files or generate a video.\n\n${results}`
+          }]
+        };
+      };
+
+      Promise.resolve(modelContext.registerTool({
+        name: 'photo2reel_find_public_guide',
+        description: 'Find a bounded set of Photo2Reel public guides about turning photos into video, slideshow timing, or image-to-video planning.',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            topic: { type: 'string', description: 'The visitor task or topic, such as slideshow music, crop room, or image-to-video motion.' }
+          },
+          required: ['topic'],
+          additionalProperties: false
+        },
+        execute: findGuide
+      }, { signal: controller.signal })).catch(() => {});
+
+      window.addEventListener('pagehide', () => controller.abort(), { once: true });
+    })();
+  </script>
 </body>
 </html>
