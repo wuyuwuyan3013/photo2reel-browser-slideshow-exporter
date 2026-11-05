@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Source image lighting anchors</title><desc id="desc">A window lights a tabletop scene. Callouts identify daylight cue, a neutral bright patch, and the direction of a cast shadow.</desc>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#122543"/><stop offset="1" stop-color="#0a1529"/></linearGradient><linearGradient id="day"><stop stop-color="#c8e8ff"/><stop offset="1" stop-color="#79afd6"/></linearGradient></defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <text x="64" y="70" fill="#64f2d2" font-family="Arial,sans-serif" font-size="36" font-weight="700" letter-spacing="4">SOURCE FRAME</text>
+  <rect x="64" y="108" width="735" height="500" rx="28" fill="#263b51" stroke="#6681a1" stroke-width="3"/>
+  <rect x="95" y="138" width="250" height="270" rx="10" fill="url(#day)" stroke="#e1f5ff" stroke-width="10"/>
+  <path d="M220 138v270M95 272h250" stroke="#e1f5ff" stroke-width="9"/>
+  <path d="M348 260 700 425" stroke="#ffcf7d" stroke-opacity=".2" stroke-width="90"/>
+  <path d="M64 432h735v176H64z" fill="#a6b8be"/>
+  <ellipse cx="573" cy="535" rx="174" ry="24" fill="#526474" opacity=".73"/>
+  <path d="M460 478c0-61 42-105 97-105s97 44 97 105v59H460z" fill="#e7e5db"/>
+  <ellipse cx="557" cy="478" rx="97" ry="33" fill="#f8f5e9"/>
+  <rect x="112" y="455" width="110" height="76" rx="8" fill="#f4f1e5"/>
+  <path d="M569 540 728 564" stroke="#304457" stroke-width="26" stroke-linecap="round" opacity=".65"/>
+  <circle cx="987" cy="191" r="15" fill="#64f2d2"/><path d="M811 214 970 194" stroke="#64f2d2" stroke-width="3"/><text x="841" y="154" fill="#eef5ff" font-family="Arial,sans-serif" font-size="38" font-weight="700">DAYLIGHT CUE</text><text x="841" y="232" fill="#bbcae0" font-family="Arial,sans-serif" font-size="29">Window stays the source</text>
+  <circle cx="987" cy="360" r="15" fill="#ffcf7d"/><path d="M222 492 970 360" stroke="#ffcf7d" stroke-width="3"/><text x="841" y="330" fill="#eef5ff" font-family="Arial,sans-serif" font-size="38" font-weight="700">BRIGHT PATCH</text><text x="841" y="402" fill="#bbcae0" font-family="Arial,sans-serif" font-size="29">Compare its color</text>
+  <circle cx="987" cy="530" r="15" fill="#64f2d2"/><path d="M712 558 970 530" stroke="#64f2d2" stroke-width="3"/><text x="841" y="497" fill="#eef5ff" font-family="Arial,sans-serif" font-size="38" font-weight="700">SHADOW</text><text x="841" y="572" fill="#bbcae0" font-family="Arial,sans-serif" font-size="29">Check its direction</text>
+</svg>

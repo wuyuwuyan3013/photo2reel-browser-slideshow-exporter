@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">One light event versus a full relight</title><desc id="desc">A bounded cloud softens a small patch of window light, while a separate full-scene sunset changes the time cue.</desc>
+  <rect width="1200" height="675" fill="#0b172d"/><text x="66" y="66" fill="#64f2d2" font-family="Arial,sans-serif" font-size="36" font-weight="700" letter-spacing="3">DEFINE THE BOUNDARY</text>
+  <rect x="65" y="110" width="520" height="500" rx="27" fill="#173548" stroke="#64f2d2" stroke-width="3"/><rect x="615" y="110" width="520" height="500" rx="27" fill="#382c37" stroke="#ffcf7d" stroke-width="3"/>
+  <text x="100" y="166" fill="#64f2d2" font-family="Arial,sans-serif" font-size="36" font-weight="700">ONE ALLOWED EVENT</text><text x="650" y="166" fill="#ffcf7d" font-family="Arial,sans-serif" font-size="36" font-weight="700">A DIFFERENT SCENE</text>
+  <rect x="105" y="205" width="440" height="255" rx="16" fill="#86bcd9"/><rect x="655" y="205" width="440" height="255" rx="16" fill="#b8715d"/>
+  <path d="M105 383h440v77H105z" fill="#a6b8be"/><path d="M655 383h440v77H655z" fill="#9c7d6f"/>
+  <circle cx="272" cy="265" r="55" fill="#eef7f1" opacity=".62"/><path d="M225 265c28-25 90-26 123 0" fill="none" stroke="#f5fcfa" stroke-width="28" stroke-linecap="round" opacity=".9"/>
+  <path d="M366 312 435 386" stroke="#f8e8c1" stroke-width="40" opacity=".55"/><rect x="350" y="379" width="122" height="15" rx="7" fill="#f9f2dc"/>
+  <circle cx="908" cy="327" r="73" fill="#ffb366"/><path d="M763 323 941 395" stroke="#ffcf7d" stroke-width="82" opacity=".4"/><rect x="865" y="380" width="122" height="15" rx="7" fill="#ffdfad"/>
+  <path d="M195 508h258" stroke="#64f2d2" stroke-width="7" stroke-linecap="round"/><circle cx="324" cy="508" r="15" fill="#64f2d2"/><path d="M745 508h258" stroke="#ffcf7d" stroke-width="7" stroke-linecap="round"/><path d="M875 491v34M858 508h34" stroke="#ffcf7d" stroke-width="6"/>
+  <text x="102" y="565" fill="#eef5ff" font-family="Arial,sans-serif" font-size="30">Local softness; daylight remains.</text><text x="649" y="565" fill="#eef5ff" font-family="Arial,sans-serif" font-size="30">Global warmth; time cue changes.</text>
+</svg>

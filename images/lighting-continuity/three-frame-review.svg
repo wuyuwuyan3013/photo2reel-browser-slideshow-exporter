@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">First, middle, final lighting review</title><desc id="desc">Three stylized frames show a small temporary dimming and the same daylight source and shadow direction at the end.</desc>
+  <rect width="1200" height="675" fill="#0b172d"/><text x="66" y="67" fill="#64f2d2" font-family="Arial,sans-serif" font-size="36" font-weight="700" letter-spacing="3">COMPARE THE SAME CUES</text>
+  <g font-family="Arial,sans-serif" font-weight="700" font-size="36" text-anchor="middle"><text x="216" y="128" fill="#eef5ff">SOURCE</text><text x="600" y="128" fill="#eef5ff">MIDDLE</text><text x="984" y="128" fill="#eef5ff">FINAL</text></g>
+  <g stroke="#6681a1" stroke-width="3"><rect x="66" y="160" width="300" height="310" rx="18" fill="#496a78"/><rect x="450" y="160" width="300" height="310" rx="18" fill="#42616f"/><rect x="834" y="160" width="300" height="310" rx="18" fill="#496a78"/></g>
+  <g fill="#c8e8ff" stroke="#e1f5ff" stroke-width="6"><rect x="90" y="184" width="82" height="158" rx="5"/><rect x="474" y="184" width="82" height="158" rx="5" opacity=".72"/><rect x="858" y="184" width="82" height="158" rx="5"/></g>
+  <path d="M66 370h300v100H66zM450 370h300v100H450zM834 370h300v100H834z" fill="#a6b8be"/>
+  <g fill="#f4f1e5"><circle cx="238" cy="349" r="36"/><circle cx="622" cy="349" r="36" opacity=".86"/><circle cx="1006" cy="349" r="36"/></g>
+  <g stroke="#354b5f" stroke-width="17" stroke-linecap="round" opacity=".75"><path d="M245 402 319 420"/><path d="M629 402 703 420"/><path d="M1013 402 1087 420"/></g>
+  <path d="M377 315h60m-18-17 18 17-18 17M761 315h60m-18-17 18 17-18 17" stroke="#64f2d2" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <g font-family="Arial,sans-serif" font-size="28" fill="#dce8fa" text-anchor="middle"><text x="216" y="520">Baseline recorded</text><text x="600" y="520">One event passes</text><text x="984" y="520">Cues still agree</text></g>
+  <rect x="65" y="568" width="1070" height="64" rx="16" fill="#143442" stroke="#64f2d2" stroke-width="2"/><text x="600" y="610" fill="#64f2d2" font-family="Arial,sans-serif" font-size="32" font-weight="700" text-anchor="middle">Shadow direction · bright patch · time-of-day cue</text>
+</svg>
