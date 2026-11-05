@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Source mark anchor for image-to-video</title>
+  <desc id="desc">A synthetic geometric portrait shows a small facial mark, with callouts to anchor it to nearby facial features before motion generation.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#111f3a"/><stop offset="1" stop-color="#081326"/></linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7c8ad"/><stop offset="1" stop-color="#d89078"/></linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <text x="64" y="70" fill="#69f0d2" font-family="Arial,sans-serif" font-size="27" font-weight="700" letter-spacing="3">SOURCE MARK ANCHOR</text>
+  <rect x="64" y="109" width="650" height="500" rx="28" fill="#1d3450" stroke="#6e8eaf" stroke-width="3"/>
+  <circle cx="389" cy="353" r="184" fill="url(#skin)"/>
+  <path d="M221 353c12-187 107-222 168-222v120c-69 12-119 83-119 175z" fill="#402c3e"/>
+  <path d="M408 156c105 7 177 89 171 209-41-64-91-98-171-113z" fill="#493043"/>
+  <path d="M301 332q46-25 92 0M421 332q46-25 92 0" fill="none" stroke="#413044" stroke-width="13" stroke-linecap="round"/>
+  <ellipse cx="352" cy="359" rx="17" ry="13" fill="#243247"/><ellipse cx="468" cy="359" rx="17" ry="13" fill="#243247"/>
+  <path d="M410 375l-18 65 29 8" fill="none" stroke="#b6635c" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M350 484q40 29 81 0" fill="none" stroke="#8b4553" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="481" cy="418" r="12" fill="#ff7d9d" stroke="#ffe1e8" stroke-width="4"/>
+  <circle cx="481" cy="418" r="28" fill="none" stroke="#ff7d9d" stroke-width="3" stroke-dasharray="7 7"/>
+  <path d="M509 417h208" stroke="#ff7d9d" stroke-width="3"/>
+  <circle cx="850" cy="180" r="14" fill="#69f0d2"/><path d="M468 359 832 180" stroke="#69f0d2" stroke-width="3"/>
+  <text x="880" y="169" fill="#f3f7ff" font-family="Arial,sans-serif" font-size="23" font-weight="700">NEARBY FEATURE</text>
+  <text x="880" y="205" fill="#bdcae0" font-family="Arial,sans-serif" font-size="18">Anchor the mark to the eye line</text>
+  <circle cx="850" cy="354" r="14" fill="#ffcf7d"/><path d="M410 440 832 354" stroke="#ffcf7d" stroke-width="3"/>
+  <text x="880" y="343" fill="#f3f7ff" font-family="Arial,sans-serif" font-size="23" font-weight="700">LOCAL RELATION</text>
+  <text x="880" y="379" fill="#bdcae0" font-family="Arial,sans-serif" font-size="18">Keep its relation to nose and mouth</text>
+  <circle cx="850" cy="530" r="14" fill="#ff7d9d"/><path d="M511 418 832 530" stroke="#ff7d9d" stroke-width="3"/>
+  <text x="880" y="519" fill="#f3f7ff" font-family="Arial,sans-serif" font-size="23" font-weight="700">PROTECTED MARK</text>
+  <text x="880" y="555" fill="#bdcae0" font-family="Arial,sans-serif" font-size="18">Treat this small cue as fixed</text>
+  <text x="64" y="651" fill="#9eb2cc" font-family="Arial,sans-serif" font-size="16" letter-spacing="2">ILLUSTRATED EXAMPLE · NOT A GENERATED OUTPUT</text>
+</svg>
