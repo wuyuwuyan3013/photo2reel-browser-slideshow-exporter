@@ -41,6 +41,7 @@
     .guides a{border:1px solid var(--line);border-radius:13px;background:#fff;padding:16px;text-decoration:none;font-weight:650;font-size:15px;transition:border-color .15s,box-shadow .15s,transform .15s}
     .guides a:hover{color:var(--purple);border-color:var(--purple);box-shadow:0 12px 24px rgba(112,73,232,.12);transform:translateY(-2px)}
     a:focus-visible{outline:3px solid var(--purple);outline-offset:4px}
+    @media (prefers-reduced-motion:reduce){.guides a{transition:none}.guides a:hover{transform:none}}
     .guides a small{display:block;font-weight:400;font-size:13px;color:var(--muted);margin-top:3px;line-height:1.5}
     .tools{border:1px solid var(--line);border-radius:18px;background:#fff;padding:24px;margin-top:8px}
     .tools h3{font-size:17px;margin:0 0 6px}
