@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image to Video Frame Evidence: What to Save When a Glitch Flashes</title>
+  <meta name="description" content="Record a brief image to video glitch with adjacent frames, playback times, and the original clip. Try a four-second test that three routine screenshots miss.">
+  <link rel="canonical" href="https://photo2reel.com/image-to-video-frame-evidence/">
+  <style>
+    :root { color-scheme: dark; --ink: #eef5ff; --muted: #c5d2e8; --aqua: #69edcf; --line: #3a4b67; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: radial-gradient(ellipse at top right, #233a66, #0b1528 36rem); color: var(--ink); font: 1rem/1.65 system-ui, sans-serif; }
+    .shell { width: min(54rem, calc(100% - 2rem)); margin-inline: auto; }
+    header, footer { padding-block: 1.25rem; display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; }
+    header, footer { border-block-end: 1px solid var(--line); }
+    footer { border-block-start: 1px solid var(--line); border-block-end: 0; margin-top: 3rem; }
+    a { color: var(--aqua); text-underline-offset: .2em; }
+    a:focus-visible { outline: 2px solid var(--aqua); outline-offset: 4px; }
+    .brand { color: var(--ink); text-decoration: none; font-weight: 800; }
+    h1 { font-size: clamp(2rem, 5vw, 3.65rem); line-height: 1.06; letter-spacing: -.045em; margin: 2.5rem 0 1rem; max-width: 21ch; }
+    h2 { font-size: clamp(1.3rem, 3vw, 1.9rem); line-height: 1.2; margin: 2rem 0 .7rem; }
+    p, li, figcaption { color: var(--muted); }
+    p { max-width: 68ch; }
+    .answer { border-inline-start: .25rem solid var(--aqua); background: #162842; padding: 1rem 1.15rem; max-width: 68ch; }
+    figure { margin: 1.5rem 0; }
+    img { display: block; max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 1rem; }
+    figcaption { margin-top: .55rem; font-size: .9rem; }
+    code { overflow-wrap: anywhere; color: var(--ink); }
+  </style>
+</head>
+<body>
+  <header class="shell"><a class="brand" href="/">Photo2Reel</a><a href="/image-to-video/">Image to video</a></header>
+  <main class="shell">
+    <article>
+      <h1>What frame evidence should you save from an image to video clip?</h1>
+      <p class="answer">Save the original clip and three neighboring images around the glitch: the last clean frame before it, the first affected frame, and the first clean frame after it. Add their playback times and the detail you were checking. Watch the full clip before choosing those frames.</p>
+
+      <h2>What three evenly spaced screenshots missed</h2>
+      <p data-evidence="fixture">We built a four-second clip in which a mint bottle slides across a dark background. We inserted a pink stripe across its cream label for three consecutive frames, encoded the sequence as an MP4 at 24 frames per second, and decoded all 96 frames. The stripe was absent at the start, midpoint, and final frame. All three routine screenshots showed a clean label.</p>
+      <figure>
+        <img src="/images/frame-evidence/label-test.webp" width="1040" height="630" alt="Three routine screenshots show clean labels. Below them, frames immediately before and after a pink stripe show where the glitch appeared.">
+        <figcaption>The two rows come from the same decoded MP4. The lower row shows the three frames needed to document the temporary change.</figcaption>
+      </figure>
+      <p data-evidence="fixture">In the decoded clip, frame 17 was clean at 0.708 seconds. Frame 18 showed the stripe at 0.750 seconds, and frames 19 and 20 still showed it. The clean label returned on frame 21 at 0.875 seconds. With zero-based frame numbers, the three routine samples were 0, 48, and 95. They missed the entire 125-millisecond event. These results describe this intentionally constructed clip.</p>
+      <p data-evidence="fixture">Try the <a href="/images/frame-evidence/synthetic-label-test.mp4">four-second test clip</a>. Play it once at normal speed and note where your eye catches the stripe. Step through the frames around that moment to recover the three images. The strip in the figure was assembled after decoding the MP4. The <a href="https://ffmpeg.org/ffmpeg-filters.html#select_002c-aselect">FFmpeg frame selection documentation</a> explains how to select by frame number when your editor does not have a frame-step control.</p>
+
+      <h2>What to put in the review note</h2>
+      <p data-evidence="fixture">A usable note for this test reads: <strong>Pink stripe crosses cream bottle label, 0.750–0.833 seconds; clean again at 0.875.</strong> Attach the clip and the frames immediately bracketing the change. Keep the full frame in each capture so another reviewer can see the bottle moving steadily through the event. Add a matching crop only if the label is hard to see at full size.</p>
+      <p data-evidence="fixture">If two takes share a filename, include a version label in your note and on the captures. Keep each time tied to the clip it came from. If a clip was trimmed after review, retain the reviewed version or record the trim offset so the same moment can be found again. For a variable-frame-rate clip, use playback timestamps or the editor’s displayed timecode. Dividing a frame number by an advertised frame rate assumes a constant frame interval.</p>
+      <p>Use the <a href="/image-to-video-render-review/">render review checklist</a> to decide what should stay stable before you watch. Then use the evidence note to point someone else to the exact moment you found a problem.</p>
+
+      <h2>Can three clean screenshots clear a clip for export?</h2>
+      <p data-evidence="fixture">They confirm the detail at those three moments. In the test clip, the label looks intact in all three screenshots even though it changes during playback. Watch the exported file and step through any moment you flag before signing off on a detail that must remain stable throughout.</p>
+    </article>
+  </main>
+  <footer class="shell"><a href="/">Photo2Reel</a><a href="/about">About</a><a href="/contact">Contact</a></footer>
+</body>
+</html>
