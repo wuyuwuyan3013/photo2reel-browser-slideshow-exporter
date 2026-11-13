@@ -1,6 +1,9 @@
 export async function onRequest(context) {
   const request = context.request;
   const url = new URL(request.url);
+  if (/^\/best-grip-socks-for-pilates(?:\/|\/index\.html)?$/.test(url.pathname)) {
+    return new Response('Page not found', { status: 404, headers: { 'Cache-Control': 'no-store' } });
+  }
   const accept = request.headers.get('accept') || '';
   if (url.pathname === '/' && accept.includes('text/markdown')) {
     const origin = url.origin;
